@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
 
+## Icon
+
+The product icon uses icons from www.flaticon.com:
+
+* Brain (https://www.flaticon.com/free-icon/brain_882998)[https://www.flaticon.com/free-icon/brain_882998]: Icon made by Freepik from www.flaticon.com
+
+* Bio sensor (https://www.flaticon.com/free-icon/bio-sensor_1452233)[https://www.flaticon.com/free-icon/bio-sensor_1452233]: Icon made by Freepik from www.flaticon.com
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
