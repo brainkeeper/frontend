@@ -15,7 +15,7 @@ describe('StorablePerson', () => {
         it('converts Person to StorablePerson when id is 0', () => {
             const person = new Person('Jon Doe', 'abc', 0);
             const storablePerson = StorablePerson.fromPerson(person);
-            expect(storablePerson.id).toBeUndefined();
+            expect(storablePerson.id).toBe(0);
             expect(storablePerson.name).toBe('Jon Doe');
             expect(storablePerson.picture).toBe('abc');
         });
