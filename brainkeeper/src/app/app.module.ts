@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { PersistentPersonService } from './services/persistent-person.service';
+import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
 
 @NgModule({
@@ -23,6 +25,7 @@ import { DatabaseService } from './services/database.service';
     MatIconModule,
   ],
   providers: [
+    { provide: PersonService, useClass: PersistentPersonService },
     DatabaseService,
   ],
   bootstrap: [AppComponent]
