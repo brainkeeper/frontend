@@ -112,6 +112,46 @@ describe('PersistentPersonService', () => {
     });
   });
 
+  describe('getAllWithScore', () => {
+    it('resolves with all Persons with a score greater zero descending', async () => {
+      const whereClause = TypeMoq.Mock.ofType<Dexie.WhereClause<StorablePerson, number>>();
+      const collection = TypeMoq.Mock.ofType<Dexie.Collection<StorablePerson, number>>();
+      collection.setup(x => x.reverse()).returns(() => collection.object);
+      collection.setup(x => x.toArray()).returns(() => Dexie.Promise.resolve([
+        new StorablePerson(1, 'Jon Doe', 'abc', 5),
+        new StorablePerson(2, 'Jon Doe', 'abc', 4),
+        new StorablePerson(3, 'Jon Doe', 'abc', 3),
+      ]));
+      whereClause.setup(x => x.above(0)).returns(() => collection.object);
+      tableMock.setup(x => x.where('score')).returns(() => whereClause.object);
+
+      const persons = await service.getAllWithScore();
+      expect(persons.length).toBe(3);
+      expect(persons[0].id).toBe(1);
+      expect(persons[1].id).toBe(2);
+      expect(persons[2].id).toBe(3);
+      tableMock.verify(x => x.where('score'), TypeMoq.Times.once());
+      whereClause.verify(x => x.above(0), TypeMoq.Times.once());
+      collection.verify(x => x.reverse(), TypeMoq.Times.once());
+      collection.verify(x => x.toArray(), TypeMoq.Times.once());
+    });
+
+    it('rejects with error', async () => {
+      const error = new Error('Test error');
+      const whereClause = TypeMoq.Mock.ofType<Dexie.WhereClause<StorablePerson, number>>();
+      const collection = TypeMoq.Mock.ofType<Dexie.Collection<StorablePerson, number>>();
+      collection.setup(x => x.reverse()).returns(() => collection.object);
+      collection.setup(x => x.toArray()).returns(() => Dexie.Promise.reject(error));
+      whereClause.setup(x => x.above(0)).returns(() => collection.object);
+      tableMock.setup(x => x.where('score')).returns(() => whereClause.object);
+
+      const person = await service.getAllWithScore().catch(e => {
+        expect(e).toBe(error);
+      });
+      expect(person).toBeUndefined();
+    });
+  });
+
   describe('add', () => {
     it('resolves with a Person', async () => {
       const newPerson = new Person('Tester', '111');
@@ -149,6 +189,7 @@ describe('PersistentPersonService', () => {
 
       await service.remove(1);
       tableMock.verify(x => x.delete(1), TypeMoq.Times.once());
+      expect(1).toBe(1); // Check is verify above
     });
 
     it('rejects with error', async () => {

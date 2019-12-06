@@ -45,11 +45,20 @@ export class PersistentPersonService extends PersonService {
     });
   }
 
+  getAllWithScore(): Promise<Person[]> {
+    return new Promise((resolve, reject) => {
+      this.dbService.persons.where('score').above(0).reverse().toArray().then((persons: StorablePerson[]) => {
+        resolve(persons.map(p => p.toPerson()));
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
   add(person: Person): Promise<Person> {
     if (person.id != null) {
       return Promise.reject('Id must be null');
     }
-    console.log(StorablePerson.fromPerson(person));
     return new Promise((resolve, reject) => {
       this.dbService.persons.add(StorablePerson.fromPerson(person)).then((id: number) => {
         person.id = id;
