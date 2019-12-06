@@ -13,7 +13,7 @@ export class DatabaseService {
   constructor() {
     this.db = new Dexie('BrainKeerDB');
     this.db.version(1).stores({
-      persons: '++id, name'
+      persons: '++id, name, score'
     });
     this.db.table('persons').mapToClass(StorablePerson);
 

@@ -7,11 +7,13 @@ export class StorablePerson {
     id: number;
     name: string;
     picture: string;
+    score: number;
 
-    constructor(id?: number, name?: string, picture?: string) {
+    constructor(id?: number, name?: string, picture?: string, score?: number) {
         this.id = id;
         this.name = name;
         this.picture = picture;
+        this.score = score;
     }
 
     /**
@@ -24,6 +26,7 @@ export class StorablePerson {
         }
         storablePerson.name = person.name;
         storablePerson.picture = person.picture;
+        storablePerson.score = person.score;
         return storablePerson;
     }
 
@@ -31,6 +34,6 @@ export class StorablePerson {
      * Converts a StorablePerson to a Person.
      */
     public toPerson(): Person {
-        return new Person(this.name, this.picture, this.id);
+        return new Person(this.name, this.picture, this.id, this.score);
     }
 }
