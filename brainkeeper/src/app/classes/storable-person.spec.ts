@@ -24,7 +24,7 @@ describe('StorablePerson', () => {
     });
 
     describe('toPerson', () => {
-        it('converts Person to StorablePerson when id is undefined', () => {
+        it('converts StorablePerson to Person when id is undefined', () => {
             const storablePerson = new StorablePerson();
             storablePerson.name = 'Jon Doe';
             storablePerson.picture = 'abc';
@@ -36,7 +36,7 @@ describe('StorablePerson', () => {
             expect(person.score).toBe(32);
         });
 
-        it('converts Person to StorablePerson when id 0', () => {
+        it('converts StorablePerson to Person when id 0', () => {
             const storablePerson = new StorablePerson();
             storablePerson.name = 'Jon Doe';
             storablePerson.picture = 'abc';
