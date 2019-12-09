@@ -20,7 +20,7 @@ steps:
   commands:
   - cd brainkeeper
   - "npm install -g @angular/cli"
-  - ng test
+  - "ng test --browsers PhantomJS"
   
 - name: "Lint"
   image: node:10
