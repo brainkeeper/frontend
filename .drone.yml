@@ -3,12 +3,7 @@ type: docker
 name: ci
 
 steps:
-  
-#- name: "Install angular-cli"
-#  image: node:10
-#  commands:
-#  - "npm install -g @angular/cli"
-  
+
 - name: "Install dependencies"
   image: node:10
   commands:
@@ -20,12 +15,12 @@ steps:
   failure: ignore # only until PhantomJS is working, after that, this line should be deleted ! 
   commands:
   - cd brainkeeper
-  - "npm install @angular/cli"
+  - "npm install -g @angular/cli"
   - "ng test --browsers PhantomJS"
   
 - name: "Lint"
   image: node:10
   commands:
   - cd brainkeeper
-  - "npm install @angular/cli"
+  - "npm install -g @angular/cli"
   - ng lint
