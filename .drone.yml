@@ -4,7 +4,8 @@ name: ci
 
 steps:
 - name: test
-  image: alpine
+  image: node:10
   commands:
   - cd brainkeeper
-  - ls -la
+  - npm install
+  - ng test
