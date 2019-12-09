@@ -3,11 +3,23 @@ type: docker
 name: ci
 
 steps:
-- name: "change directory"
-  image: alpine
+- name: "Install dependencies"
+  image: node:10
   commands:
   - cd brainkeeper
-- name: "ls"
-  image: alpine
+  - npm install
+- name: "Install angular-cli"
+  image: node:10
   commands:
-  - ls -la
+  - cd brainkeeper
+  - "npm install -g @angular/cli@7.3.9"
+- name: "Test"
+  image: node:10
+  commands:
+  - cd brainkeeper
+  - ng test
+- name: "Lint"
+  image: node:10
+  commands:
+  - cd brainkeeper
+  - ng lint
