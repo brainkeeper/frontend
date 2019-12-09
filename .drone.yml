@@ -4,10 +4,10 @@ name: ci
 
 steps:
   
-- name: "Install angular-cli"
-  image: node:10
-  commands:
-  - "npm install -g @angular/cli"
+#- name: "Install angular-cli"
+#  image: node:10
+#  commands:
+#  - "npm install -g @angular/cli"
   
 - name: "Install dependencies"
   image: node:10
@@ -19,6 +19,7 @@ steps:
   image: node:10
   commands:
   - cd brainkeeper
+  - "npm install -g @angular/cli"
   - ng test
   
 - name: "Lint"
