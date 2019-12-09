@@ -1,10 +1,10 @@
 kind: pipeline
 type: docker
-name: greeting
+name: ci
 
 steps:
-- name: en
-  image: alpine
+- name: test
+  image: trion/ng-cli
   commands:
-  - echo hello
-  - echo world
+  - cd brainkeeper
+  - ng test
