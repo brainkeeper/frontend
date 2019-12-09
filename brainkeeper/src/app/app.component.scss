@@ -3,3 +3,23 @@
     right: 15px;
     bottom: 15px;
 }
+
+@import '../styles.scss';
+
+$primary: map-get($brainkeeper-theme, primary);
+$accent: map-get($brainkeeper-theme, accent);
+
+.example{
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
+
+.example.primary {
+    background-color: mat-color($primary);
+}
+
+.example.accent{
+    background-color: mat-color($accent);
+}
+

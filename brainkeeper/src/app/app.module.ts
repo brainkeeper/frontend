@@ -9,8 +9,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { BigPersonCardComponent } from './big-person-card/big-person-card.component';
-import {MatCardModule} from "@angular/material/card";
+import {MatCardModule} from '@angular/material/card';
 import { PersonsComponent } from './persons/persons.component';
+import { PersistentPersonService } from './services/persistent-person.service';
+import { PersonService } from './services/person-service';
+import { DatabaseService } from './services/database.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { PersonsComponent } from './persons/persons.component';
     MatIconModule,
     MatCardModule,
   ],
-  providers: [],
+  providers: [
+    { provide: PersonService, useClass: PersistentPersonService },
+    DatabaseService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
