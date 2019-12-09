@@ -27,4 +27,5 @@ steps:
   image: node:10
   commands:
   - cd brainkeeper
+  - "npm install -g @angular/cli"
   - ng lint
