@@ -1,9 +1,12 @@
 .example-card {
   max-width: 400px;
+  border:5px solid #5cc00b;
 }
 
 .example-header-image {
   //TODO: replace with success or fail icon
-  background-image: url('~assets/brainkeeper.png');
+  //background-image: url('assets/brainkeeper.png');
+  border:1px solid #5cc00b;
   background-size: cover;
 }
+

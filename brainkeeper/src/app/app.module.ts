@@ -10,11 +10,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { BigPersonCardComponent } from './big-person-card/big-person-card.component';
 import {MatCardModule} from "@angular/material/card";
+import { PersonsComponent } from './persons/persons.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BigPersonCardComponent
+    BigPersonCardComponent,
+    PersonsComponent
   ],
   imports: [
     BrowserModule,
