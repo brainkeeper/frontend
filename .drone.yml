@@ -3,9 +3,11 @@ type: docker
 name: ci
 
 steps:
-- name: test
-  image: node:10
+- name: "change directory"
+  image: alpine
   commands:
   - cd brainkeeper
-  - npm install
-  - ng test
+- name: "ls"
+  image: alpine
+  commands:
+  - ls -la
