@@ -39,7 +39,7 @@ export class Person {
      * The person's id or null when no id is assigned.
      */
     public get id(): number | null {
-        return this._id == null ? null : this._id;
+        return this._id;
     }
 
 
