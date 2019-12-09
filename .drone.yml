@@ -4,7 +4,7 @@ name: ci
 
 steps:
 - name: test
-  image: trion/ng-cli
+  image: alpine
   commands:
   - cd brainkeeper
-  - ng test
+  - ls -la
