@@ -15,7 +15,7 @@ export class SessionService {
         if (!personService) {
             throw new Error('A PersonService must be provided.');
         }
-        this._round = 1;
+        this._round = 0;
         this._personService = personService;
     }
 
@@ -24,11 +24,25 @@ export class SessionService {
     }
 
     public get correctPerson() {
+        if (!this._correctPerson) {
+            throw new Error('Round must be started before a person is selected!');
+        }
         return this._correctPerson;
     }
 
+    public get correctPersonName() {
+        return this.correctPerson.name;
+    }
+
     public get persons() {
+        if (!this._selectedPersons) {
+            throw new Error('Round must be started before persons is selected!');
+        }
         return this._selectedPersons;
+    }
+
+    public get pictures() {
+        return [this.persons.map(p => p.picture)];
     }
 
     private set selected(newSelected: Person[]) {
@@ -59,13 +73,7 @@ export class SessionService {
 
     public checkPerson(index: number): boolean {
         const selectedPerson =  this.persons[index];
-        const choseRight = selectedPerson === this.correctPerson;
-        if (choseRight) {
-
-        } else {
-            // TODO 
-        }
-        return choseRight;
+        return selectedPerson === this.correctPerson;
     }
 
 }
