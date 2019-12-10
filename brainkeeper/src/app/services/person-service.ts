@@ -21,6 +21,13 @@ export abstract class PersonService {
      */
     abstract getSixRandom(): Promise<Person[]>;
 
+
+    /**
+     * Gets all persons that have a score greater than zero
+     * in descending order, sorted by score.
+     */
+    abstract getAllWithScore(): Promise<Person[]>;
+
     /**
      * Adds a new person.
      * Id of the person to add must be null.

@@ -5,8 +5,9 @@ export class Person {
     private _id: number | null;
     private _name: string;
     private _picture: string;
+    private _score: number;
 
-    constructor(name: string, picture: string, id?: number) {
+    constructor(name: string, picture: string, id?: number, score?: number) {
         if (!name) {
             throw new Error('Name must not be null/empty/undefined');
         }
@@ -16,6 +17,10 @@ export class Person {
         if (id !== undefined) {
             this.checkId(id);
         }
+        if (score !== undefined && score < 0) {
+            throw new Error('Score must be positive');
+        }
+        this._score = score === undefined ? 0 : score;
         this._id = id === undefined || id == null ? null : id;
         this._picture = picture;
         this._name = name;
@@ -34,7 +39,25 @@ export class Person {
      * The person's id or null when no id is assigned.
      */
     public get id(): number | null {
-        return this._id == null ? null : this._id;
+        return this._id;
+    }
+
+
+    /**
+     * Sets the person's score (how often the person was recognized).
+     */
+    public set score(score: number) {
+        if (score === null || score < 0) {
+            throw new Error('Score must be positive');
+        }
+        this._score = score;
+    }
+
+    /**
+     * Sets the person's score (how often the person was recognized).
+     */
+    public get score(): number {
+        return this._score;
     }
 
 

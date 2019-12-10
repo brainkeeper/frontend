@@ -38,11 +38,16 @@ describe('Person', () => {
       expect(() => new Person('Jon Doe', 'abc', null)).toThrowError();
     });
 
+    it('throws when score is -1', () => {
+      expect(() => new Person('Jon Doe', 'abc', 0, -1)).toThrowError();
+    });
+
     it('creates with no id set', () => {
       const person = new Person('Jon Doe', 'abc');
       expect(person.name).toBe('Jon Doe');
       expect(person.picture).toBe('abc');
       expect(person.id).toBeNull();
+      expect(person.score).toBe(0);
     });
 
     it('creates with id 0', () => {
@@ -50,6 +55,7 @@ describe('Person', () => {
       expect(person.name).toBe('Jon Doe');
       expect(person.picture).toBe('abc');
       expect(person.id).toBe(0);
+      expect(person.score).toBe(0);
     });
 
     it('creates with id 1', () => {
@@ -57,6 +63,7 @@ describe('Person', () => {
       expect(person.name).toBe('Jon Doe');
       expect(person.picture).toBe('abc');
       expect(person.id).toBe(1);
+      expect(person.score).toBe(0);
     });
 
     it('creates with id 20', () => {
@@ -64,6 +71,12 @@ describe('Person', () => {
       expect(person.name).toBe('Jon Doe');
       expect(person.picture).toBe('abc');
       expect(person.id).toBe(20);
+      expect(person.score).toBe(0);
+    });
+
+    it('creates with score 23', () => {
+      const person = new Person('Jon Doe', 'abc', 20, 23);
+      expect(person.score).toBe(23);
     });
   });
 
@@ -123,6 +136,16 @@ describe('Person', () => {
         expect(() => person.picture = undefined).toThrowError();
       });
 
+      it('throws when setting score to null', () => {
+        const person = new Person('Jon Doe', 'abc', 1);
+        expect(() => person.score = null).toThrowError();
+      });
+
+      it('throws when setting score to -1', () => {
+        const person = new Person('Jon Doe', 'abc', 1);
+        expect(() => person.score = -1).toThrowError();
+      });
+
       it('sets name', () => {
         const person = new Person('Jon Doe', 'abc', 1);
         person.name = 'Jane Doe';
@@ -139,6 +162,12 @@ describe('Person', () => {
         const person = new Person('Jon Doe', 'abc', 1);
         person.id = 2;
         expect(person.id).toBe(2);
+      });
+
+      it('sets score', () => {
+        const person = new Person('Jon Doe', 'abc', 1, 1);
+        person.score = 2;
+        expect(person.score).toBe(2);
       });
   });
 });
