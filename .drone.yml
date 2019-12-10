@@ -14,10 +14,10 @@ steps:
   image: node:10
   commands:
   - cd brainkeeper
-  - "npm run-script ng test --browsers ChromeHeadless --watch false"
+  - "npx ng test --browsers ChromeHeadless --watch false"
   
 - name: "Lint"
   image: node:10
   commands:
   - cd brainkeeper
-  - npm run-script ng lint
+  - "npx ng lint"
