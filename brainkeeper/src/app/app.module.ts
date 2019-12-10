@@ -2,15 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { AppComponent } from './app.component';
+import { GridComponent } from './components/session_screen/grid/grid.component';
+import { PersonNameComponent } from './components/session_screen/person-name/person-name.component';
+
+
 import { BigPersonCardComponent } from './big-person-card/big-person-card.component';
 import {MatCardModule} from '@angular/material/card';
 import { PersonsComponent } from './persons/persons.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
@@ -19,7 +23,11 @@ import { DatabaseService } from './services/database.service';
   declarations: [
     AppComponent,
     BigPersonCardComponent,
-    PersonsComponent
+    PersonsComponent,
+
+    GridComponent,
+    PersonNameComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -31,7 +39,7 @@ import { DatabaseService } from './services/database.service';
     MatCardModule,
   ],
   providers: [
-    { provide: PersonService, useClass: PersistentPersonService },
+    { provide: PersonService, useClass: PersistentPersonService, },
     DatabaseService,
   ],
   bootstrap: [AppComponent]
