@@ -19,7 +19,7 @@ import { DatabaseService } from './services/database.service';
   declarations: [
     AppComponent,
     GridComponent,
-    PersonNameComponent
+    PersonNameComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +30,7 @@ import { DatabaseService } from './services/database.service';
     MatIconModule,
   ],
   providers: [
-    { provide: PersonService, useClass: PersistentPersonService },
+    { provide: PersonService, useClass: PersistentPersonService, },
     DatabaseService,
   ],
   bootstrap: [AppComponent]
