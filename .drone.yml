@@ -12,15 +12,12 @@ steps:
   
 - name: "Test"
   image: node:10
-  failure: ignore # only until PhantomJS is working, after that, this line should be deleted ! 
   commands:
   - cd brainkeeper
-  - "npm install -g @angular/cli"
-  - "ng test --browsers PhantomJS"
+  - "npm run-script ng test --browsers ChromeHeadless --watch false"
   
 - name: "Lint"
   image: node:10
   commands:
   - cd brainkeeper
-  - "npm install -g @angular/cli"
-  - ng lint
+  - npm run-script ng lint
