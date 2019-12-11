@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AppComponent } from './app.component';
+import { GridComponent } from './components/session_screen/grid/grid.component';
+import { PersonNameComponent } from './components/session_screen/person-name/person-name.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +17,9 @@ import { DatabaseService } from './services/database.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GridComponent,
+    PersonNameComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,7 @@ import { DatabaseService } from './services/database.service';
     MatIconModule,
   ],
   providers: [
-    { provide: PersonService, useClass: PersistentPersonService },
+    { provide: PersonService, useClass: PersistentPersonService, },
     DatabaseService,
   ],
   bootstrap: [AppComponent]
