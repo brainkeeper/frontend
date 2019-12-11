@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: ci
+
+steps:
+
+- name: "Install dependencies"
+  image: node:10
+  commands:
+  - cd brainkeeper
+  - npm install
+  
+- name: "Test"
+  image: buildkite/puppeteer
+  commands:
+  - cd brainkeeper
+  - "npx ng test --browsers ChromeHeadlessNoSandbox --watch false"
+  
+- name: "Lint"
+  image: node:10
+  commands:
+  - cd brainkeeper
+  - "npx ng lint"
