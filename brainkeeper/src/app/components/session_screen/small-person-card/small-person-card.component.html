@@ -1,0 +1,22 @@
+<div >
+    <mat-card class=small-card id=scard>
+        <mat-card-header>
+            <mat-card-title>Person</mat-card-title>
+            <mat-card-subtitle>Mögliche Person</mat-card-subtitle>
+            <div mat-card-avatar class="small-card-header-image"></div>
+        </mat-card-header>
+        <img mat-card-image src={{person.picture}} alt="Photo of selected Person">
+
+        <mat-card-actions>
+            <button mat-button (click)= onSelect()>Wählen</button>
+        </mat-card-actions>
+      </mat-card>
+</div>
+
+<div *ngIf="selectedPerson" class=background>
+    <app-big-person-card [chosenPerson]="selectedPerson"></app-big-person-card>
+</div>
+
+
+
+

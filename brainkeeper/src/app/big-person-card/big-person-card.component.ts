@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Person } from '../classes/person';
 
 @Component({
   selector: 'app-big-person-card',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BigPersonCardComponent implements OnInit {
 
-  constructor() { }
+  show: boolean;
+
+  @Input() chosenPerson: Person;
+  constructor() {
+    this.show = true;
+  }
 
   ngOnInit() {
+  }
+
+
+  close() {
+      this.show = false;
   }
 
 }
