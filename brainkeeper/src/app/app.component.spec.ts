@@ -15,7 +15,7 @@ describe('AppComponent', () => {
         MatIconModule,
       ],
       declarations: [
-        AppComponent
+        AppComponent,
       ],
     }).compileComponents();
   }));
