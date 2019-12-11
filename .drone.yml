@@ -9,21 +9,21 @@ steps:
   commands:
   - cd brainkeeper
   - npm install
-  
+
 - name: "Test"
   image: buildkite/puppeteer
   commands:
   - cd brainkeeper
-  - "npx ng test --browsers ChromeHeadlessNoSandbox --watch false"
-  
+  - "npx ng test --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage"
+
+- name: Coverage
+  image: plugins/codecov
+  settings:
+    token:
+      from_secret: codecov-token
+
 - name: "Lint"
   image: node:10
   commands:
   - cd brainkeeper
   - "npx ng lint"
-
-- name: coverage
-  image: plugins/codecov
-  settings:
-    token:
-      from_secret: codecov-token
