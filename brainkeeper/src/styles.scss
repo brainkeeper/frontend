@@ -41,4 +41,5 @@ $config: mat-typography-config();
 .brainkeeper-title {
     font-size: mat-font-size($config, headline);
     font-family: 'Opticon_One';
+    margin-top: 13px;
 }
