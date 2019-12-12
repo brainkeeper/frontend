@@ -21,6 +21,9 @@ steps:
   settings:
     token:
       from_secret: codecov-token
+  when:
+    event:
+    - push
 
 - name: "Lint"
   image: node:10
