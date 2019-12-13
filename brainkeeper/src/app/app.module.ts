@@ -15,6 +15,7 @@ import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { StartComponent } from './components/start/start.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
     GridComponent,
     PersonNameComponent,
     NavigationBarComponent,
+    StartComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GridComponent } from './components/session_screen/grid/grid.component';
+import { StartComponent } from './components/start/start.component';
 
 const routes: Routes = [
-  { path: 'grid', component: GridComponent},
+  { path: '', component: StartComponent },
 ];
 
 @NgModule({
