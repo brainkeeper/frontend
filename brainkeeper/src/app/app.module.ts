@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
+import { PersonsComponent } from './components/persons/persons.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { StartComponent } from './components/start/start.component';
 
@@ -22,6 +23,7 @@ import { StartComponent } from './components/start/start.component';
     AppComponent,
     GridComponent,
     PersonNameComponent,
+    PersonsComponent,
     NavigationBarComponent,
     StartComponent,
   ],
