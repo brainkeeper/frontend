@@ -8,6 +8,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 
 const routes: Routes = [
   { path: '', component: StartComponent },
+  { path: 'game', component: GridComponent },
   { path: 'persons', component: PersonsComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'statistics', component: StatisticsComponent },
