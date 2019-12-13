@@ -14,12 +14,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridComponent,
     PersonNameComponent,
+    NavigationBarComponent,
   ],
   imports: [
     BrowserModule,
