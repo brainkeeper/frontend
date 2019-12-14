@@ -1,1 +1,42 @@
-<app-navigation-bar></app-navigation-bar>
+<app-navigation-bar>
+        <button 
+            id="btn-settings"
+            mat-icon-button
+            aria-label="Go to Settings"
+            (click)="navigateToSettings()">
+                <mat-icon>settings</mat-icon>
+        </button>
+</app-navigation-bar>
+
+<div class="container">
+    <button
+        id="btn-play"
+        mat-raised-button
+        color="accent"
+        aria-label="Play game"
+        (click)="navigateToGame()">
+        <mat-icon inline="true">play_arrow</mat-icon>
+        Play
+    </button>
+
+    <div class="bottom-container">
+        <button
+            id="btn-statistics"
+            mat-raised-button
+            color="primary"
+            aria-label="See statistics"
+            (click)="navigateToStatistics()">
+            <mat-icon inline="true">trending_up</mat-icon>
+            Statistics
+        </button>
+        <button
+            id="btn-persons"
+            mat-raised-button
+            color="primary"
+            aria-label="Manage persons"
+            (click)="navigateToPersons()">
+            <mat-icon inline="true">people</mat-icon>
+            Persons
+        </button>
+    </div>
+</div>
