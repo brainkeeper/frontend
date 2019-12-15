@@ -36,17 +36,26 @@
     #btn-play {
         width: 100%;
     }
-    .bottom-container {
-        width: 100%;
-    }
     #btn-statistics {
-        font-size: 1.2em;
+        font-size: 1.5em;
+        width: 100%;
+        height: calc(50% - 20px);
     }
     #btn-persons {
-        font-size: 1.2em;
+        font-size: 1.5em;
+        width: 100%;
+        height: calc(50% - 20px);
     }
     #btn-play {
         font-size: 3em;
+    }
+    .bottom-container {
+        width: 100%;
+        flex-direction: column;
+        padding: 0px;
+    }
+    .container {
+        height: calc(100% - (56px + 40px));
     }
 }
 
@@ -60,6 +69,9 @@
     #btn-play {
         font-size: 3.5em;
     }
+    .container {
+        height: calc(100% - (56px + 40px));
+    }
 }
 
 @media(min-width: 600px) {
@@ -71,5 +83,8 @@
     }
     #btn-play {
         font-size: 4em;
+    }
+    .container {
+        height: calc(100% - (64px + 40px));
     }
 }
