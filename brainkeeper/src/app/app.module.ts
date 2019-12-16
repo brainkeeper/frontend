@@ -18,6 +18,11 @@ import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
 import { SmallPersonCardComponent } from './components/session_screen/small-person-card/small-person-card.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { PersonsComponent } from './components/persons/persons.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { StartComponent } from './components/start/start.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,11 @@ import { SmallPersonCardComponent } from './components/session_screen/small-pers
     GridComponent,
     PersonNameComponent,
     SmallPersonCardComponent,
-
+    SettingsComponent,
+    StatisticsComponent,
+    PersonsComponent,
+    NavigationBarComponent,
+    StartComponent,
   ],
   imports: [
     BrowserModule,
