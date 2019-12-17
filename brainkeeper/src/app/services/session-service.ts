@@ -48,7 +48,7 @@ export class SessionService {
         return this.persons.map(p => p.name);
     }
 
-    private set selected(newSelected: Person[]) {
+    public set selected(newSelected: Person[]) {
         this._selectedPersons = newSelected;
     }
 

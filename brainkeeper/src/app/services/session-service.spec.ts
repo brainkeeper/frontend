@@ -1,11 +1,8 @@
-import { Person } from '../classes/person';
-import Dexie from 'dexie';
 import { StorablePerson } from '../classes/storable-person';
 import { SessionService } from './session-service';
 import * as TypeMoq from 'typemoq';
 import { PersonService } from './person-service';
 import { PersistentPersonService } from './persistent-person.service';
-import { async } from 'q';
 
 describe('SessionService', () => {
 
@@ -42,10 +39,6 @@ describe('SessionService', () => {
             expect(() => sessionService.correctPerson).toThrowError('Round must be started before a person is selected!');
             expect(() => sessionService.persons).toThrowError('Round must be started before persons are selected!');
             expect(() => sessionService.pictures).toThrowError('Round must be started before persons are selected!');
-        });
-
-        it('throws when not receiving a person service', () => {
-            expect(() => new SessionService(null)).toThrowError('A PersonService must be provided.');
         });
     });
 
