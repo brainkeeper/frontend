@@ -46,6 +46,10 @@ export class SessionService {
         return [this.persons.map(p => p.picture)];
     }
 
+    public get names() {
+        return [this.persons.map(p => p.name)];
+    }
+
     private set selected(newSelected: Person[]) {
         this._selectedPersons = newSelected;
     }
@@ -74,4 +78,7 @@ export class SessionService {
         return selectedPerson === this.correctPerson;
     }
 
+    public finishRound(): void {
+        this.correctPerson.score += 1;
+    }
 }
