@@ -27,3 +27,26 @@ steps:
   commands:
   - cd brainkeeper
   - "npx ng lint"
+
+- name: "Build"
+  image: node:10
+  commands:
+  - cd brainkeeper
+  - npm run build
+
+- name: "Docker tags"
+  image: alpine
+  commands:
+  - echo -n "n-${DRONE_BUILD_NUMBER}," > .tags
+  - if [ "${DRONE_BRANCH}" = "master" ]; then echo -n "latest"; else echo -n "${DRONE_BRANCH}"; fi;
+  - echo -n "tags are: "; cat .tags ; echo
+
+#- name: "Docker build & push"  
+#  image: plugins/docker
+#  settings:
+#    repo: hmbrainkeeper/frontend
+#    username:
+#      from_secret: hmbkdocker_username
+#    password:
+#      from_secret: hmbkdocker_password
+#    dockerfile: path/to/Dockerfile
