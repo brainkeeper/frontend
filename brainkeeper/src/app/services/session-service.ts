@@ -1,5 +1,6 @@
 import { Person } from '../classes/person';
 import { PersonService } from './person-service';
+import { isUndefined } from 'util';
 
 /**
  * A service that manages the persons appearing in each round.
@@ -35,8 +36,8 @@ export class SessionService {
     }
 
     public get persons() {
-        if (!this._selectedPersons) {
-            throw new Error('Round must be started before persons is selected!');
+        if (this._selectedPersons === undefined) {
+            throw new Error('Round must be started before persons are selected!');
         }
         return this._selectedPersons;
     }
@@ -49,21 +50,18 @@ export class SessionService {
         this._selectedPersons = newSelected;
     }
 
-    public startNextRound(): void {
+    public async startNextRound(): Promise<void> {
         this._round++;
-        this.selectSix();
+        await this.selectSix();
         this.chooseCorrectPerson();
     }
 
-    private selectSix(): void {
-        this._personService.getSixRandom()
-        .then(
-            (result) => {
-                this.selected = result;
-            },
-            (error) => {
-                console.log('Failed to retrieve persons to display.', error);
-            });
+    private async selectSix(): Promise<void> {
+        const s = await this._personService.getSixRandom();
+        if (!s) {
+            throw new Error('Failed to retrieve persons to display.');
+        }
+        this.selected = s;
     }
 
     private chooseCorrectPerson(): void {

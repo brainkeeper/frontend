@@ -5,6 +5,7 @@ import { SessionService } from './session-service';
 import * as TypeMoq from 'typemoq';
 import { PersonService } from './person-service';
 import { PersistentPersonService } from './persistent-person.service';
+import { async } from 'q';
 
 describe('SessionService', () => {
 
@@ -21,16 +22,9 @@ describe('SessionService', () => {
 
     beforeEach(() => {
         personServiceMock = TypeMoq.Mock.ofType<PersistentPersonService>(PersistentPersonService);
-        personServiceMock.setup(s => s.getSixRandom()).returns(() => Dexie.Promise.resolve(persons));
-        personServiceMock.setup(s => s.getAll()).returns(() => Dexie.Promise.resolve(persons));
-        personServiceMock.setup(s => s.getAllWithScore()).returns((a) => {
-            if (a === 1) {
-                return Dexie.Promise.resolve([persons[0]]);
-            } else {
-                return Dexie.Promise.resolve([persons[1]]);
-            }
-        });
-        personServiceMock.setup(s => s.getAll()).returns(() => Dexie.Promise.resolve(persons));
+        personServiceMock.setup(s => s.getSixRandom()).returns(() => new Promise((resolve, reject) => {
+            resolve(persons);
+        }));
     });
 
     describe('ctor', () => {
@@ -42,14 +36,16 @@ describe('SessionService', () => {
         it('creates without persons', () => {
             const sessionService = new SessionService(personServiceMock.object);
             expect(() => sessionService.correctPerson).toThrowError('Round must be started before a person is selected!');
-            expect(() => sessionService.persons).toThrowError('Round must be started before persons is selected!');
-            expect(() => sessionService.pictures).toThrowError('Round must be started before persons is selected!');
+            expect(() => sessionService.persons).toThrowError('Round must be started before persons are selected!');
+            expect(() => sessionService.pictures).toThrowError('Round must be started before persons are selected!');
         });
     });
 
     describe('getter', () => {
-        it('', () => {
-
+        it('gets the round number', () => {
+            const sessionService = new SessionService(personServiceMock.object);
+            expect(sessionService.round).toBeDefined();
+            expect(sessionService.round).toBe(0);
         });
 
         it('', () => {
@@ -74,12 +70,12 @@ describe('SessionService', () => {
             expect(sessionService.round).toBe(2);
         });
 
-        it('selects six random people', () => {
+        it('selects six random people', async () => {
             const sessionService = new SessionService(personServiceMock.object);
-            sessionService.startNextRound();
+            await sessionService.startNextRound();
             expect(sessionService.persons.length).toBe(6);
             expect(sessionService.persons).toBe(persons);
-        })
+        });
     });
 
     describe('check person', () => {
