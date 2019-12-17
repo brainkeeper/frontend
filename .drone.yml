@@ -18,6 +18,7 @@ steps:
 
 - name: "Upload to codecov"
   image: plugins/codecov
+  detach: true
   settings:
     token:
       from_secret: codecov-token
