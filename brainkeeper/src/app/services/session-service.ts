@@ -1,23 +1,21 @@
+import { Injectable } from '@angular/core';
 import { Person } from '../classes/person';
 import { PersonService } from './person-service';
-import { isUndefined } from 'util';
 
 /**
  * A service that manages the persons appearing in each round.
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class SessionService {
 
-    private _personService: PersonService;
     private _round: number;
     private _correctPerson: Person;
     private _selectedPersons: Person[];
 
-    constructor(public personService: PersonService) {
-        if (!personService) {
-            throw new Error('A PersonService must be provided.');
-        }
+    constructor(private personService: PersonService) {
         this._round = 0;
-        this._personService = personService;
     }
 
     public get round() {
@@ -43,11 +41,11 @@ export class SessionService {
     }
 
     public get pictures() {
-        return [this.persons.map(p => p.picture)];
+        return this.persons.map(p => p.picture);
     }
 
     public get names() {
-        return [this.persons.map(p => p.name)];
+        return this.persons.map(p => p.name);
     }
 
     private set selected(newSelected: Person[]) {
@@ -61,7 +59,7 @@ export class SessionService {
     }
 
     private async selectSix(): Promise<void> {
-        const s = await this._personService.getSixRandom().catch(e => { throw e; });
+        const s = await this.personService.getSixRandom().catch(e => { throw e; });
         if (!s) {
             throw new Error('Failed to retrieve persons to display.');
         }

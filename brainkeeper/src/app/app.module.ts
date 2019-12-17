@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
+import { SessionService } from './services/session-service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { PersonsComponent } from './components/persons/persons.component';
@@ -42,6 +43,7 @@ import { StartComponent } from './components/start/start.component';
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
     DatabaseService,
+    SessionService,
   ],
   bootstrap: [AppComponent]
 })

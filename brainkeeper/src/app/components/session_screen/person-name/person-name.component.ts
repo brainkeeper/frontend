@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from 'src/app/services/session-service';
 
 @Component({
   selector: 'app-person-name',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonNameComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sesionservice: SessionService) { }
 
   ngOnInit() {
   }
 
+  public get name() {
+    return this.sesionservice.correctPersonName;
+  }
 }

@@ -67,12 +67,12 @@ describe('SessionService', () => {
 
         it('gets the pictures of the selected persons after they are selected', () => {
             expect(startedService.names).toBeDefined();
-            expect(startedService.names).toEqual([persons.map(p => p.name)]);
+            expect(startedService.names).toEqual(persons.map(p => p.name));
         });
 
         it('gets the names of the selected persons after they are selected', () => {
             expect(startedService.pictures).toBeDefined();
-            expect(startedService.pictures).toEqual([persons.map(p => p.picture)]);
+            expect(startedService.pictures).toEqual(persons.map(p => p.picture));
         });
     });
 
