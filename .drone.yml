@@ -39,4 +39,4 @@ steps:
   commands:
   - echo -n "n-${DRONE_BUILD_NUMBER}," > .tags
   - if [ "${DRONE_BRANCH}" = "master" ]; then echo -n "latest"; else echo -n "${DRONE_BRANCH}"; fi;
-  - echo -n "tags are: "; cat .tags ; echo
+  - echo -n "tags are "; cat .tags ; echo
