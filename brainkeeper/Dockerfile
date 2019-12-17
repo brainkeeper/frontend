@@ -1,3 +1,3 @@
 FROM nginx:alpine
 
-COPY dist/* /usr/share/nginx/html/
+COPY brainkeeper/dist/* /usr/share/nginx/html/
