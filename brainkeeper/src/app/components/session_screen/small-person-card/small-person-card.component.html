@@ -1,13 +1,7 @@
 <div >
-    <mat-card class=small-card id=scard>
-        <mat-card-header>
-            <mat-card-title>Person</mat-card-title>
-            <mat-card-subtitle>Mögliche Person</mat-card-subtitle>
-            <div mat-card-avatar class="small-card-header-image"></div>
-        </mat-card-header>
+    <mat-card class=small-card id=scard (click) = onSelect()>
         <img mat-card-image src={{person.picture}} alt="Photo of selected Person">
-
-        <mat-card-actions>
+        <mat-card-actions class= small-card-button>
             <button mat-button (click)= onSelect()>Wählen</button>
         </mat-card-actions>
       </mat-card>

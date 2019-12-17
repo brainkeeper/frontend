@@ -8,7 +8,7 @@ import { GridComponent } from './components/session_screen/grid/grid.component';
 import { PersonNameComponent } from './components/session_screen/person-name/person-name.component';
 
 
-import { BigPersonCardComponent } from './big-person-card/big-person-card.component';
+import { BigPersonCardComponent } from './components/session_screen/big-person-card/big-person-card.component';
 import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';

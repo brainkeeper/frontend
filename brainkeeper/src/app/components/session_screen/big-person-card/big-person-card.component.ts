@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Person } from '../classes/person';
+import { Person } from '../../../classes/person';
 
 @Component({
   selector: 'app-big-person-card',
@@ -9,10 +9,12 @@ import { Person } from '../classes/person';
 export class BigPersonCardComponent implements OnInit {
 
   show: boolean;
+  isRight: boolean;
 
   @Input() chosenPerson: Person;
   constructor() {
     this.show = true;
+    this.isRight = false;
   }
 
   ngOnInit() {

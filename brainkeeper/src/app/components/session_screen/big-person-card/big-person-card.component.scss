@@ -1,0 +1,35 @@
+.big-card-right {
+  max-width: 800px;
+  width: 50%;
+  position: fixed;
+  top: 100px;
+  left: 500px;
+  display: inline-block;
+  z-index: 100;
+  box-shadow: -1px 0px 33px 16px rgba(70,235,70,1);
+}
+.big-card-wrong {
+  max-width: 800px;
+  width: 50%;
+  position: fixed;
+  top: 100px;
+  left: 500px;
+  display: inline-block;
+  z-index: 100;
+  box-shadow: -1px 0px 33px 16px rgba(235,17,49,1);
+}
+
+.bigcard-header-image {
+  //TODO: replace with success or fail icon
+  //background-image: url('assets/brainkeeper.png');
+  border:1px solid #5cc00b;
+  background-size: cover;
+}
+
+.info{
+  font-size: large;
+}
+.mat-button{
+  font-size: large;
+  text-align: right;
+}
