@@ -40,3 +40,12 @@ steps:
   - echo -n "n-${DRONE_BUILD_NUMBER}," > .tags
   - if [ "${DRONE_BRANCH}" = "master" ]; then echo -n "latest" >> .tags; else echo -n "${DRONE_BRANCH}" >> .tags; fi;
   - echo -n "tags are "; cat .tags ; echo
+
+- name: "Docker build & push"
+  image: plugins/docker
+  settings:
+    repo: hmbrainkeeper/frontend
+    username: hmbrainkeeper
+    password:
+      from_secret: hmbkdocker_password
+    dockerfile: brainkeeper/Dockerfile
