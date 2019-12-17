@@ -61,7 +61,7 @@ export class SessionService {
     }
 
     private async selectSix(): Promise<void> {
-        const s = await this._personService.getSixRandom();
+        const s = await this._personService.getSixRandom().catch(e => { throw e; });
         if (!s) {
             throw new Error('Failed to retrieve persons to display.');
         }

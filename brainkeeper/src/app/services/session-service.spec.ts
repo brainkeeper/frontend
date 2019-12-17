@@ -43,6 +43,10 @@ describe('SessionService', () => {
             expect(() => sessionService.persons).toThrowError('Round must be started before persons are selected!');
             expect(() => sessionService.pictures).toThrowError('Round must be started before persons are selected!');
         });
+
+        it('throws when not receiving a person service', () => {
+            expect(() => new SessionService(null)).toThrowError('A PersonService must be provided.');
+        });
     });
 
     describe('getter', () => {
@@ -82,6 +86,24 @@ describe('SessionService', () => {
         it('selects six random people', () => {
             expect(startedService.persons.length).toBe(6);
             expect(startedService.persons).toBe(persons);
+        });
+
+        it('throws when receiving an error', async () => {
+            const pMock = TypeMoq.Mock.ofType<PersistentPersonService>(PersistentPersonService);
+            pMock.setup(s => s.getSixRandom()).returns(() => Promise.reject(new Error('No persons for you')));
+            const sessionService = new SessionService(pMock.object);
+            const result = await sessionService.startNextRound().catch(e => {
+                expect(e).toEqual(new Error('No persons for you'));
+            });
+        });
+
+        it('throws when not receiving 6 persons', async () => {
+            const pMock = TypeMoq.Mock.ofType<PersistentPersonService>(PersistentPersonService);
+            pMock.setup(s => s.getSixRandom()).returns(() => Promise.resolve(null));
+            const sessionService = new SessionService(pMock.object);
+            const result = await sessionService.startNextRound().catch(e => {
+                expect(e).toEqual(new Error('Failed to retrieve persons to display.'));
+            });
         });
     });
 
