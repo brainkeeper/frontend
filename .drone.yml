@@ -14,7 +14,7 @@ steps:
   image: buildkite/puppeteer
   commands:
   - cd brainkeeper
-  - "npx ng test --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage"
+  - "npx ng test --browsers ChromeHeadlessNoSandbox --watch false --progress false --codeCoverage"
   depends_on: [ "Install dependencies" ]
 
 - name: "Upload to codecov"
@@ -38,8 +38,7 @@ steps:
   - npm run build
   depends_on: [ "Install dependencies" ]
   when:
-    event:
-    - push
+    event: [ push ]
 
 - name: "Docker tags"
   image: alpine
@@ -48,8 +47,7 @@ steps:
   - if [ "${DRONE_BRANCH}" = "master" ]; then echo -n "latest" >> .tags; else echo -n "${DRONE_BRANCH}" >> .tags; fi;
   - echo -n "tags are "; cat .tags ; echo
   when:
-    event:
-    - push
+    event: [ push ]
 
 - name: "Docker build & push"
   image: plugins/docker
@@ -61,5 +59,4 @@ steps:
     dockerfile: brainkeeper/Dockerfile
   depends_on: [ "Build", "Test & Coverage"]
   when:
-    event:
-    - push
+    event: [ push ]
