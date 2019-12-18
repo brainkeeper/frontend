@@ -14,7 +14,7 @@ export class BigPersonCardComponent implements OnInit {
   @Input() chosenPerson: Person;
   constructor() {
     this.show = true;
-    this.isRight = false;
+    this.isRight = true;
   }
 
   ngOnInit() {
