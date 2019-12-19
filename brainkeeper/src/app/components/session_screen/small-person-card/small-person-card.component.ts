@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from 'src/app/classes/person';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-small-person-card',
@@ -18,7 +19,7 @@ export class SmallPersonCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect(): void{
+  onSelect(): void {
     this.selectedPerson = this.person;
   }
 

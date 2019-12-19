@@ -9,12 +9,11 @@ import { Person } from '../../../classes/person';
 export class BigPersonCardComponent implements OnInit {
 
   show: boolean;
-  isRight: boolean;
-
+  clicked: boolean;
   @Input() chosenPerson: Person;
+  @Input() isRight: boolean;
   constructor() {
     this.show = true;
-    this.isRight = true;
   }
 
   ngOnInit() {
@@ -22,7 +21,15 @@ export class BigPersonCardComponent implements OnInit {
 
 
   close() {
-      this.show = false;
+     this.show = false;
+     this.clicked = true;
+  }
+
+  open() {
+    if (this.clicked) {
+      this.show = true;
+      this.clicked = false;
+    }
   }
 
 }

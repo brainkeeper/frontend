@@ -1,11 +1,10 @@
 <div *ngIf="isRight; else isWrong">
-  <div *ngIf = "show">
+  <div *ngIf = "show; else open()">
     <div *ngIf = "chosenPerson" >
       <mat-card class="big-card-right" id = "bcardr">
           <mat-card-header>
             <mat-card-title>{{chosenPerson.name}}</mat-card-title>
           </mat-card-header>
-        <!--  TODO: replace with pic of selected person-->
           <img mat-card-image src="{{chosenPerson.picture}}" alt="Photo of the selected Person" class="example-header-image">
           <mat-card-content>
             <p class="info">
@@ -20,15 +19,13 @@
   </div>
 </div>
 
-
 <ng-template #isWrong>
-  <div *ngIf = "show">
+  <div *ngIf = "show; else open()">
     <div *ngIf = "chosenPerson" >
       <mat-card class="big-card-wrong" id = "bcardw">
           <mat-card-header>
             <mat-card-title>"{{chosenPerson.name}}"</mat-card-title>
           </mat-card-header>
-        <!--  TODO: replace with pic of selected person-->
           <img mat-card-image src="{{chosenPerson.picture}}" alt="Photo of the selected Person" class="example-header-image">
           <mat-card-content>
             <p class="info">

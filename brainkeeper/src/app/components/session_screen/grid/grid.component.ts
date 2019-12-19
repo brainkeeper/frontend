@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SessionService } from 'src/app/services/session-service';
+import { Person } from 'src/app/classes/person';
 
 @Component({
   selector: 'app-grid',
@@ -9,8 +10,11 @@ import { SessionService } from 'src/app/services/session-service';
 })
 export class GridComponent implements OnInit {
 
+  chosenPerson: Person;
+  show: boolean;
   public personNames: string[];
   public personPictures: string[];
+  public isRightPerson = true;
 
   public get names() {
     return this.personNames;
@@ -27,6 +31,7 @@ export class GridComponent implements OnInit {
 
   async ngOnInit() {
     await this.startRound();
+    this.show = false;
    }
 
   async startRound(): Promise<void> {
@@ -36,12 +41,16 @@ export class GridComponent implements OnInit {
   }
 
   clickedPicture(index: number): void {
+    this.show = true;
+    this.chosenPerson = new Person(this.personNames[index], 'assets/rentner_test.jpg');
     if (this.sessionService.checkPerson(index)) {
+      this.isRightPerson = true;
       // TODO show correct animation
       this.sessionService.finishRound();
       this.startRound();
     } else {
       // TODO show false animation
+      this.isRightPerson = false;
     }
   }
 

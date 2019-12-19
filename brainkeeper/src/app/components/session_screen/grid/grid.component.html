@@ -1,12 +1,16 @@
 <app-person-name></app-person-name>
 <div class="container">
 
-    <app-small-person-card></app-small-person-card>
-    <app-small-person-card></app-small-person-card>
-    <app-small-person-card></app-small-person-card>
-    <app-small-person-card></app-small-person-card>
-    <app-small-person-card></app-small-person-card>
-    <app-small-person-card></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(0)"></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(1)"></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(2)"></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(3)"></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(4)"></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(5)"></app-small-person-card>
+</div>
+
+<div>
+    <app-big-person-card [isRight] = isRightPerson [chosenPerson] = "chosenPerson" ></app-big-person-card>
 </div>
 
     <!--<img src="data:image/png;base64,{{personPictures[0]}}" height="200" width="200" (click)="clickedPicture(0);" alt="test" />

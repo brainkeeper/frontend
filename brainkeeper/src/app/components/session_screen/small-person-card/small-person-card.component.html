@@ -1,15 +1,13 @@
-<div >
-    <mat-card class=small-card id=scard (click) = onSelect()>
+
+<div>
+    <mat-card class=small-card id=scard >
         <img mat-card-image src={{person.picture}} alt="Photo of selected Person">
-        <mat-card-actions class= small-card-button>
-            <button mat-button (click)= onSelect()>Wählen</button>
-        </mat-card-actions>
       </mat-card>
 </div>
 
-<div *ngIf="selectedPerson" class=background>
-    <app-big-person-card [chosenPerson]="selectedPerson"></app-big-person-card>
-</div>
+<!--<div *ngIf="selectedPerson" class=background>
+    <app-big-person-card [chosenPerson]="selectedPerson" ></app-big-person-card>
+</div>-->
 
 
 
