@@ -43,7 +43,7 @@ steps:
 - name: "Docker tags"
   image: alpine
   commands:
-  - echo -n "n-${DRONE_BUILD_NUMBER}," > .tags
+  - echo -n "n-${DRONE_BUILD_NUMBER},c-${DRONE_COMMIT_SHA}," > .tags
   - if [ "${DRONE_BRANCH}" = "master" ]; then echo -n "latest" >> .tags; else echo -n "${DRONE_BRANCH}" >> .tags; fi;
   - echo -n "tags are "; cat .tags ; echo
   when:
