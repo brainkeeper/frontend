@@ -26,7 +26,11 @@ export class PersistentPersonService extends PersonService {
   getById(id: number): Promise<Person> {
     return new Promise((resolve, reject) => {
       this.dbService.persons.get(id).then((person: StorablePerson) => {
-        resolve(person.toPerson());
+        if (person === undefined) {
+          reject();
+        } else {
+          resolve(person.toPerson());
+        }
       }).catch(error => {
         reject(error);
       });
@@ -59,8 +63,10 @@ export class PersistentPersonService extends PersonService {
     if (person.id != null) {
       return Promise.reject('Id must be null');
     }
+    const storablePerson = StorablePerson.fromPerson(person);
+    delete storablePerson.id;
     return new Promise((resolve, reject) => {
-      this.dbService.persons.add(StorablePerson.fromPerson(person)).then((id: number) => {
+      this.dbService.persons.add(storablePerson).then((id: number) => {
         person.id = id;
         resolve(person);
       }).catch(error => {
