@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule} from '@angular/material/dialog';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
@@ -19,6 +20,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { PersonsComponent } from './components/persons/persons.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { StartComponent } from './components/start/start.component';
+import { DialogConfirmDeleteComponent } from './components/dialogs/dialog-confirm-delete/dialog-confirm-delete.component';
 import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-exit/dialog-confirm-exit.component';
 
 @NgModule({
@@ -31,6 +33,7 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
     PersonsComponent,
     NavigationBarComponent,
     StartComponent,
+    DialogConfirmDeleteComponent,
     DialogConfirmExitComponent,
   ],
   imports: [
@@ -40,12 +43,14 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
     DatabaseService,
   ],
   entryComponents: [
+    DialogConfirmDeleteComponent,
     DialogConfirmExitComponent,
   ],
   bootstrap: [AppComponent]
