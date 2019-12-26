@@ -19,6 +19,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { PersonsComponent } from './components/persons/persons.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { StartComponent } from './components/start/start.component';
+import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-exit/dialog-confirm-exit.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { StartComponent } from './components/start/start.component';
     PersonsComponent,
     NavigationBarComponent,
     StartComponent,
+    DialogConfirmExitComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,9 @@ import { StartComponent } from './components/start/start.component';
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
     DatabaseService,
+  ],
+  entryComponents: [
+    DialogConfirmExitComponent,
   ],
   bootstrap: [AppComponent]
 })
