@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
@@ -19,6 +20,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { PersonsComponent } from './components/persons/persons.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { StartComponent } from './components/start/start.component';
+import { PersonListItemComponent } from './components/person-list-item/person-list-item.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { StartComponent } from './components/start/start.component';
     PersonsComponent,
     NavigationBarComponent,
     StartComponent,
+    PersonListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { StartComponent } from './components/start/start.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatListModule,
   ],
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
