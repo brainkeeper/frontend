@@ -53,9 +53,9 @@ export class SessionService {
     }
 
     public async startNextRound(): Promise<void> {
-        this._round++;
         await this.selectSix();
         this.chooseCorrectPerson();
+        this._round++;
     }
 
     private async selectSix(): Promise<void> {
@@ -78,5 +78,9 @@ export class SessionService {
 
     public finishRound(): void {
         this.correctPerson.score += 1;
+    }
+
+    public isSessionFinished(): boolean {
+        return this.round % 6 === 1 && this.round > 6;
     }
 }

@@ -70,9 +70,9 @@ describe('SessionService', () => {
     });
 
     describe('start round', () => {
-        it('increases round number', () => {
+        it('increases round number', async () => {
             expect(startedService.round).toBe(1);
-            startedService.startNextRound();
+            await startedService.startNextRound();
             expect(startedService.round).toBe(2);
         });
 
@@ -85,7 +85,7 @@ describe('SessionService', () => {
             const pMock = TypeMoq.Mock.ofType<PersistentPersonService>(PersistentPersonService);
             pMock.setup(s => s.getSixRandom()).returns(() => Promise.reject(new Error('No persons for you')));
             const sessionService = new SessionService(pMock.object);
-            const result = await sessionService.startNextRound().catch(e => {
+            await sessionService.startNextRound().catch(e => {
                 expect(e).toEqual(new Error('No persons for you'));
             });
         });
@@ -116,6 +116,26 @@ describe('SessionService', () => {
             const score = person.score;
             startedService.finishRound();
             expect(person.score).toBe(score + 1);
+        });
+    });
+
+    describe('is session finished', () => {
+        it('returns false if less than 6 rounds have been played', async () => {
+            let i: number;
+            for (i = 1; i < 6; i++) {
+                await startedService.startNextRound();
+                expect(startedService.isSessionFinished()).toBeFalsy();
+            }
+        });
+
+        it('returns true if 6 rounds have been played and false in the 7th', async () => {
+            let i: number;
+            for (i = 1; i < 7; i++) {
+                await startedService.startNextRound();
+            }
+            expect(startedService.isSessionFinished()).toBeTruthy();
+            await startedService.startNextRound();
+            expect(startedService.isSessionFinished()).toBeFalsy();
         });
     });
 });
