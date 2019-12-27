@@ -1,6 +1,8 @@
 <app-navigation-bar title="Persons" [showBackButton]="true"></app-navigation-bar>
 
 <mat-list>
-<app-person-list-item></app-person-list-item>
-<app-person-list-item></app-person-list-item>
+<!--  <app-person-list-item></app-person-list-item>-->
+<!--  <app-person-list-item></app-person-list-item>-->
+
+  <app-person-list-item *ngFor="let p of personService.getAll() | async" [person]="p"></app-person-list-item>
 </mat-list>
