@@ -1,1 +1,5 @@
 <app-navigation-bar title="Statistics" [showBackButton]="true"></app-navigation-bar>
+
+<mat-list>
+  <app-person-list-item *ngFor="let p of allPersonsWithScore | async" [person]="p" [showScore]="true"></app-person-list-item>
+</mat-list>
