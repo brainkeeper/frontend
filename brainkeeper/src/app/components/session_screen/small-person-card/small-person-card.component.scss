@@ -1,5 +1,8 @@
 .small-card {
-  min-width: 200px;
+  width: 40%;
+  height: 40%;
+  min-width: 40%;
+  min-height: 40%;
   max-width: 350px;
   border-radius: 20px;
   margin-bottom: 50px;
@@ -11,11 +14,11 @@
 .small-card:hover{
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
-.mat-card-image{
+/*.mat-card-image{
   object-fit: cover;
-  height: 300px;
-  width: 350px;
-}
+  height: 120%;
+  width: 120%;
+}*/
 
 .small-card-header-image {
   background-image: url('C:/Users/Colin/Documents/Studium/Software-Engineering/brainkeeper/frontend/brainkeeper/src/assets/rentner_test.jpg');

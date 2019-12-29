@@ -10,7 +10,8 @@ import { Input } from '@angular/core';
 export class SmallPersonCardComponent implements OnInit {
 
   person: Person;
-  selectedPerson: Person;
+
+  @Input() picture: string;
 
   constructor() {
     this.person = new Person('Oma', 'assets/rentner_test.jpg', 1);
@@ -19,9 +20,6 @@ export class SmallPersonCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect(): void {
-    this.selectedPerson = this.person;
-  }
 
 
 }

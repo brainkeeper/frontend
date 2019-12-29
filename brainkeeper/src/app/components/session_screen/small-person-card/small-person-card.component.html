@@ -1,13 +1,10 @@
 
 <div>
     <mat-card class=small-card id=scard >
-        <img mat-card-image src={{person.picture}} alt="Photo of selected Person">
-      </mat-card>
+        <img mat-card-image src="{{'data:image/jpg;base64,' + picture}}" alt="Photo of selected Person">
+    </mat-card>
 </div>
 
-<!--<div *ngIf="selectedPerson" class=background>
-    <app-big-person-card [chosenPerson]="selectedPerson" ></app-big-person-card>
-</div>-->
 
 
 

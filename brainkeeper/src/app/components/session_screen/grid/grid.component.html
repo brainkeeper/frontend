@@ -1,12 +1,12 @@
 <app-person-name></app-person-name>
 <div class="container">
 
-    <app-small-person-card (click)="clickedPicture(0)"></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(1)"></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(2)"></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(3)"></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(4)"></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(5)"></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(0)" [picture] = personPictures[0]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(1)" [picture] = personPictures[1]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(2)" [picture] = personPictures[2]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(3)" [picture] = personPictures[3]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(4)" [picture] = personPictures[4]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(5)" [picture] = personPictures[5]></app-small-person-card>
 </div>
 
 <div>

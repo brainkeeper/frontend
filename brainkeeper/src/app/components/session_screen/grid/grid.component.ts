@@ -42,7 +42,7 @@ export class GridComponent implements OnInit {
 
   clickedPicture(index: number): void {
     this.show = true;
-    this.chosenPerson = new Person(this.personNames[index], 'assets/rentner_test.jpg');
+    this.chosenPerson = new Person(this.personNames[index], this.personPictures[index]);
     if (this.sessionService.checkPerson(index)) {
       this.isRightPerson = true;
       // TODO show correct animation
