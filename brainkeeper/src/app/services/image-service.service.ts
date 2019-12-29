@@ -21,6 +21,7 @@ export class ImageServiceService {
       console.log(' IN SERVICE BEFORE REZISE, ' + file.size);
       this.ResizeImage(file/*, ( rI ) => { resizedImage = rI; }*/);
       console.log(' IN SERVICE AFTER REZISE, ' + file.size);
+      this.compress(file);
     }
 
     const reader = new FileReader();
@@ -79,7 +80,7 @@ export class ImageServiceService {
     );*/
   }
 
-  c(file: File/*, setter: (resizedImage: File) => void*/): void {
+  compress(file: File/*, setter: (resizedImage: File) => void*/): void {
 
     console.log('**IMAGE RESIZER**: was called');
     const WIDTH = 400;
