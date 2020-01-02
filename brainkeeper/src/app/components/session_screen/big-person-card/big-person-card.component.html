@@ -19,7 +19,7 @@
     <div *ngIf = "chosenPerson" >
       <mat-card class="big-card-wrong" id = "bcardw">
           <mat-card-header>
-            <mat-card-title>"{{chosenPerson.name}}"</mat-card-title>
+            <mat-card-title>{{chosenPerson.name}}</mat-card-title>
           </mat-card-header>
           <img mat-card-image src="{{'data:image/jpg;base64,' + chosenPerson.picture}}" alt="Photo of the selected Person" class = "mat-card-image">
           <mat-card-actions>
