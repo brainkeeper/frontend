@@ -16,6 +16,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
+import { SessionService } from './services/session-service';
 
 import { AppComponent } from './app.component';
 import { GridComponent } from './components/session_screen/grid/grid.component';
@@ -61,6 +62,7 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
     DatabaseService,
+    SessionService,
   ],
   entryComponents: [
     DialogConfirmDeleteComponent,

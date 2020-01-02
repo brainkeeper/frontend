@@ -1,9 +1,4 @@
 <app-person-name></app-person-name>
-<div class="container">
-    <img src="assets/testpic.png" alt="test" />
-    <img src="assets/testpic.png" alt="test" />
-    <img src="assets/testpic.png" alt="test" />
-    <img src="assets/testpic.png" alt="test" />
-    <img src="assets/testpic.png" alt="test" />
-    <img src="assets/testpic.png" alt="test" />
-  </div>
+<div class="container" *ngIf="persons" >
+    <img *ngFor="let person of persons; index as i" src="{{'data:image/png;base64,' + person.picture}}" height="200" width="200" (click)="clickedPicture(i);" alt="test" />
+</div>
