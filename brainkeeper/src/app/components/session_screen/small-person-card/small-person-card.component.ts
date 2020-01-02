@@ -9,12 +9,9 @@ import { Input } from '@angular/core';
 })
 export class SmallPersonCardComponent implements OnInit {
 
-  person: Person;
-
-  @Input() picture: string;
+  @Input() person: Person;
 
   constructor() {
-    this.person = new Person('Oma', 'assets/rentner_test.jpg', 1);
   }
 
   ngOnInit() {

@@ -15,6 +15,9 @@ export class PersonNameComponent implements OnInit {
   }
 
   public get name() {
+    if (this.sesionservice.round === 0) {
+      return '';
+    }
     return this.sesionservice.correctPersonName;
   }
 }

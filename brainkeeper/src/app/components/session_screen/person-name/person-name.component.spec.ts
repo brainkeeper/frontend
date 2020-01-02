@@ -8,9 +8,10 @@ describe('PersonNameComponent', () => {
   let component: PersonNameComponent;
   let fixture: ComponentFixture<PersonNameComponent>;
   let sessionStub: SessionService;
+  let sessionMock: TypeMoq.IMock<SessionService>;
 
   beforeEach(async(() => {
-    const sessionMock = TypeMoq.Mock.ofType<SessionService>(SessionService);
+    sessionMock = TypeMoq.Mock.ofType<SessionService>(SessionService);
     sessionMock.setup(s => s.correctPersonName).returns(() => 'Thorsten');
     sessionStub = sessionMock.object;
 
@@ -34,6 +35,12 @@ describe('PersonNameComponent', () => {
   });
 
   it('should return the correct name', () => {
+    sessionMock.setup(s => s.round).returns(() => 1);
     expect(component.name).toEqual('Thorsten');
+  });
+
+  it('should return "" if no round has been started yet', () => {
+    sessionMock.setup(s => s.round).returns(() => 0);
+    expect(component.name).toEqual('');
   });
 });

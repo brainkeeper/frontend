@@ -1,0 +1,50 @@
+<app-navigation-bar title="Person" showBackButton="true" (backClicked)="onBackClicked($event)"></app-navigation-bar>
+
+
+<form [formGroup]="personForm" (ngSubmit)="onSave()" *ngIf="person || isNew">
+    <div class="container">
+        <mat-card id="card">
+            <mat-card-header>
+                <mat-card-title>{{isNew ? 'New person' : person.name}}</mat-card-title>
+                <mat-card-subtitle *ngIf="!isNew">Id: {{person.id}}</mat-card-subtitle>
+            </mat-card-header>
+
+            <img *ngIf="isNew" mat-card-image
+                [src]="picture.value ? 'data:image/jpg;base64,' + picture.value : '/assets/person-24px.svg'"
+                id="picture" [ngClass]="{ 'required': picture.errors?.required, 'placeholder': !picture.value}">
+            <img *ngIf="!isNew" mat-card-image src="{{'data:image/jpg;base64,' + person.picture}}" id="picture"
+                alt="Photo of {{person.name}}">
+
+            <mat-card-content>
+                <mat-error *ngIf="picture.errors?.required" id="error-pic-required">A picture is required</mat-error>
+                <button (click)="fileInput.click()" mat-raised-button color="primary" type="button"
+                    id="btn-change-picture">
+                    <mat-icon inline="true">add_photo_alternate</mat-icon>
+                    <span>Upload new image</span>
+                    <input #fileInput type="file" accept="image/*" (change)="onFileInput($event)"
+                        style="display:none;" id="input-picture"/>
+                </button>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" required id="input-name">
+                    <mat-error *ngIf="name.errors?.required" id="error-name-required">Name is required</mat-error>
+                </mat-form-field>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button id="btn-save" type="submit" mat-button mat-raised-button color="primary"
+                    [disabled]="personForm.invalid || !changed()">
+                    <mat-icon inline="true">save</mat-icon>
+                    SAVE
+                </button>
+                <button id="btn-delete" *ngIf="!isNew" type="button" mat-button mat-raised-button color="warn"
+                    (click)="onDelete()">
+                    <mat-icon inline="true">delete</mat-icon>
+                    DELETE
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</form>

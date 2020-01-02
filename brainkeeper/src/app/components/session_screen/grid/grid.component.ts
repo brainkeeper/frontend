@@ -11,47 +11,35 @@ import { Person } from 'src/app/classes/person';
 export class GridComponent implements OnInit {
 
   chosenPerson: Person;
-  show: boolean;
   public personNames: string[];
   public personPictures: string[];
   public isRightPerson = true;
+  private _persons: Person[];
 
-  public get names() {
-    return this.personNames;
+  public get persons() {
+    return this._persons;
   }
 
-  public get pictures() {
-    return this.personPictures;
-  }
-
-  constructor(public sessionService: SessionService) {
-    this.personNames = new Array(6);
-    this.personPictures = new Array(6);
-   }
+  constructor(private sessionService: SessionService) { }
 
   async ngOnInit() {
     await this.startRound();
-    this.show = false;
    }
 
   async startRound(): Promise<void> {
     await this.sessionService.startNextRound().catch();
-    this.personNames = this.sessionService.names;
-    this.personPictures = this.sessionService.pictures;
+    this._persons = this.sessionService.persons;
   }
 
-  clickedPicture(index: number): void {
-    this.show = true;
-    this.chosenPerson = new Person(this.personNames[index], this.personPictures[index]);
+
+  async clickedPicture(index: number): Promise<void> {
+    this.chosenPerson = this.persons[index];
     if (this.sessionService.checkPerson(index)) {
       this.isRightPerson = true;
-      // TODO show correct animation
       this.sessionService.finishRound();
-      this.startRound();
+      await this.startRound();
     } else {
-      // TODO show false animation
       this.isRightPerson = false;
     }
   }
-
 }

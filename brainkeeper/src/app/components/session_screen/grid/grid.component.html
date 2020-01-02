@@ -1,23 +1,16 @@
 <app-person-name></app-person-name>
 <div class="container">
-
-    <app-small-person-card (click)="clickedPicture(0)" [picture] = personPictures[0]></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(1)" [picture] = personPictures[1]></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(2)" [picture] = personPictures[2]></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(3)" [picture] = personPictures[3]></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(4)" [picture] = personPictures[4]></app-small-person-card>
-    <app-small-person-card (click)="clickedPicture(5)" [picture] = personPictures[5]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(0)" [person] = persons[0]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(1)" [person] = persons[1]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(2)" [person] = persons[2]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(3)" [person] = persons[3]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(4)" [person] = persons[4]></app-small-person-card>
+    <app-small-person-card (click)="clickedPicture(5)" [person] = persons[5]></app-small-person-card>
 </div>
 
 <div>
     <app-big-person-card [isRight] = isRightPerson [chosenPerson] = "chosenPerson" ></app-big-person-card>
 </div>
 
-    <!--<img src="data:image/png;base64,{{personPictures[0]}}" height="200" width="200" (click)="clickedPicture(0);" alt="test" />
-    <img src="data:image/png;base64,{{personPictures[1]}}" height="200" width="200" (click)="clickedPicture(1);" alt="test" />
-    <img src="data:image/png;base64,{{personPictures[2]}}" height="200" width="200" (click)="clickedPicture(2);" alt="test" />
-    <img src="data:image/png;base64,{{personPictures[3]}}" height="200" width="200" (click)="clickedPicture(3);" alt="test" />
-    <img src="data:image/png;base64,{{personPictures[4]}}" height="200" width="200" (click)="clickedPicture(4);" alt="test" />
-    <img src="data:image/png;base64,{{personPictures[5]}}" height="200" width="200" (click)="clickedPicture(5);" alt="test" />
-  </div>-->
+
 

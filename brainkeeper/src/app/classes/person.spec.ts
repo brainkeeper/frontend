@@ -170,4 +170,26 @@ describe('Person', () => {
         expect(person.score).toBe(2);
       });
   });
+
+  describe('copy', () => {
+    it('copies person with no id', () => {
+      const person = new Person('Jon Doe', 'abc', undefined, 2);
+      const copy = person.copy();
+
+      expect(person.name).toEqual(copy.name);
+      expect(person.id).toEqual(person.id);
+      expect(person.picture).toEqual(person.picture);
+      expect(person.score).toEqual(person.score);
+    });
+
+    it('copies person with an id', () => {
+      const person = new Person('Jon Doe', 'abc', 5, 2);
+      const copy = person.copy();
+
+      expect(person.name).toEqual(copy.name);
+      expect(person.id).toEqual(person.id);
+      expect(person.picture).toEqual(person.picture);
+      expect(person.score).toEqual(person.score);
+    });
+  });
 });
