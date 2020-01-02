@@ -6,6 +6,8 @@ import { GridComponent } from './grid.component';
 import { PersonNameComponent } from './../person-name/person-name.component';
 import { SessionService } from 'src/app/services/session-service';
 import { isNgTemplate } from '@angular/compiler';
+import { SmallPersonCardComponent } from 'src/app/components/session_screen/small-person-card/small-person-card.component';
+import { BigPersonCardComponent } from 'src/app/components/session_screen/big-person-card/big-person-card.component';
 
 
 describe('GridComponent', () => {
@@ -38,7 +40,7 @@ describe('GridComponent', () => {
     sessionStub = sessionMock.object;
 
     TestBed.configureTestingModule({
-      declarations: [ GridComponent, PersonNameComponent ],
+      declarations: [ GridComponent, PersonNameComponent, SmallPersonCardComponent, BigPersonCardComponent ],
       providers: [
         { provide: SessionService, useValue: sessionStub }
       ]
