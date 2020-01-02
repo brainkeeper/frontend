@@ -60,6 +60,16 @@ describe('PersistentPersonService', () => {
       tableMock.verify(x => x.get(1), TypeMoq.Times.once());
     });
 
+    it('rejects when no person was found', async () => {
+      tableMock.setup(x => x.get(1)).returns(() => Dexie.Promise.resolve(undefined));
+      try {
+        await service.getById(1);
+        fail('Should reject');
+      } catch (error) {
+        expect(error).toBeUndefined();
+      }
+    });
+
     it('rejects with error', async () => {
       const error = new Error('Test error');
       tableMock.setup(x => x.get(1)).returns(() => Dexie.Promise.reject(error));
@@ -155,7 +165,9 @@ describe('PersistentPersonService', () => {
   describe('add', () => {
     it('resolves with a Person', async () => {
       const newPerson = new Person('Tester', '111');
-      tableMock.setup(x => x.add(StorablePerson.fromPerson(newPerson))).returns(() => Dexie.Promise.resolve(3));
+      const storablePerson = StorablePerson.fromPerson(newPerson);
+      delete storablePerson.id;
+      tableMock.setup(x => x.add(storablePerson)).returns(() => Dexie.Promise.resolve(3));
 
       const person = await service.add(newPerson);
       expect(person.id).toBe(3);
@@ -174,7 +186,9 @@ describe('PersistentPersonService', () => {
     it('rejects with error', async () => {
       const error = new Error('Test error');
       const newPerson = new Person('Tester', '111');
-      tableMock.setup(x => x.add(StorablePerson.fromPerson(newPerson))).returns(() => Dexie.Promise.reject(error));
+      const storablePerson = StorablePerson.fromPerson(newPerson);
+      delete storablePerson.id;
+      tableMock.setup(x => x.add(storablePerson)).returns(() => Dexie.Promise.reject(error));
 
       const person = await service.add(newPerson).catch(e => {
         expect(e).toBe(error);

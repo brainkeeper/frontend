@@ -96,6 +96,17 @@ export class Person {
         return this._picture;
     }
 
+    /**
+     * Copies the person.
+     */
+    public copy() {
+        return new Person(
+            this.name,
+            this.picture,
+            this.id == null ? undefined : this.id,
+            this.score)
+        ;
+    }
 
     private checkId(id: number) {
         if (id === null || id === undefined) {
