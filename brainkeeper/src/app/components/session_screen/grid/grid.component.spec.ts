@@ -8,6 +8,11 @@ import { SessionService } from 'src/app/services/session-service';
 import { isNgTemplate } from '@angular/compiler';
 import { SmallPersonCardComponent } from 'src/app/components/session_screen/small-person-card/small-person-card.component';
 import { BigPersonCardComponent } from 'src/app/components/session_screen/big-person-card/big-person-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 describe('GridComponent', () => {
@@ -43,6 +48,13 @@ describe('GridComponent', () => {
       declarations: [ GridComponent, PersonNameComponent, SmallPersonCardComponent, BigPersonCardComponent ],
       providers: [
         { provide: SessionService, useValue: sessionStub }
+      ],
+      imports: [
+        MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
       ]
     })
     .compileComponents();
