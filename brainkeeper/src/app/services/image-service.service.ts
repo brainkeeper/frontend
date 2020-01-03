@@ -26,16 +26,20 @@ export class ImageServiceService {
       throw new Error('The height should be positive, but it was: ' + height);
     }
 
-    return new Promise<string>( async (resolve, reject) => {
+    return new Promise<string>( (resolve, reject) => {
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
-      reader.onload = async () => {
+      reader.onload = () => {
         const img = new Image();
         img.src = reader.result.toString();
 
-        resolve(await this.changeImage(img, file.type, width, height, quality));
+        const result = this.changeImage(img, file.type, width, height, quality);
+
+        // console.log(result);
+
+        resolve(result);
       };
 
       reader.onerror = () => {
@@ -58,7 +62,7 @@ export class ImageServiceService {
 
     // console.log('type2: ' + type + ',  width: ' + width + ', height: ' + height + ', quality: ' + quality);
 
-    return new Promise<string>((resolve, reject) => {
+    return await new Promise<string>((resolve, reject) => {
       img.onload = () => {
         const resizingCanvas: HTMLCanvasElement = document.createElement('canvas');
         const resizingCanvasContext = resizingCanvas.getContext('2d');
