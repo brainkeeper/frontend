@@ -31,6 +31,7 @@ describe('SmallPersonCardComponent', () => {
     fixture = TestBed.createComponent(SmallPersonCardComponent);
     component = fixture.componentInstance;
     // TODO set person with component.person = ...;
+    component.person = new Person('Tatzelwurm', 'TatzelwurmSeinBild');
     fixture.detectChanges();
   });
 

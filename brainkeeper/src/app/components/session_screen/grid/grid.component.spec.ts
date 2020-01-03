@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { Person } from 'src/app/classes/person';
 
 
 describe('GridComponent', () => {
@@ -23,6 +24,7 @@ describe('GridComponent', () => {
   let sessionMock: TypeMoq.IMock<SessionService>;
   let sessionStub: SessionService;
   let round: number;
+
 
   const persons = [
     new StorablePerson(1, 'John Doe', 'a').toPerson(),
@@ -71,6 +73,8 @@ describe('GridComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(GridComponent);
     component = fixture.componentInstance;
+    component.chosenPerson = new Person('John Doe', 'JohnDoeSeiBuidl');
+    component.isRightPerson = true;
     fixture.detectChanges();
   });
 

@@ -11,7 +11,7 @@ import { Person } from 'src/app/classes/person';
 export class GridComponent implements OnInit {
 
   chosenPerson: Person;
-  public isRightPerson = true;
+  isRightPerson = true;
   private _persons: Person[];
 
   public get persons() {
