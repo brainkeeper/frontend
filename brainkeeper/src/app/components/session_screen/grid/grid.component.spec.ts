@@ -8,6 +8,13 @@ import { SessionService } from 'src/app/services/session-service';
 import { isNgTemplate } from '@angular/compiler';
 import { SmallPersonCardComponent } from 'src/app/components/session_screen/small-person-card/small-person-card.component';
 import { BigPersonCardComponent } from 'src/app/components/session_screen/big-person-card/big-person-card.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 describe('GridComponent', () => {
@@ -40,9 +47,20 @@ describe('GridComponent', () => {
     sessionStub = sessionMock.object;
 
     TestBed.configureTestingModule({
-      declarations: [ GridComponent, PersonNameComponent, SmallPersonCardComponent, BigPersonCardComponent ],
+      declarations: [
+        GridComponent,
+        PersonNameComponent,
+        SmallPersonCardComponent,
+        BigPersonCardComponent,
+      ],
       providers: [
         { provide: SessionService, useValue: sessionStub }
+      ],
+      imports: [
+        MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatDialogModule,
       ]
     })
     .compileComponents();

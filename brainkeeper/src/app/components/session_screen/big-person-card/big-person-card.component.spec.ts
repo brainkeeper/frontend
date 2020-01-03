@@ -20,11 +20,9 @@ describe('BigPersonCardComponent', () => {
         MatToolbarModule,
         MatIconModule,
         MatCardModule,
-        MatDialog,
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSnackBar,
         MatSnackBarModule
       ]
     })
