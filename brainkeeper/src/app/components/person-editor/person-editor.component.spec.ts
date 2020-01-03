@@ -20,6 +20,7 @@ import { DialogConfirmDeleteComponent } from '../dialogs/dialog-confirm-delete/d
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { PersonEditorComponent } from './person-editor.component';
 import { DialogConfirmExitComponent } from '../dialogs/dialog-confirm-exit/dialog-confirm-exit.component';
+import { ImageServiceService } from 'src/app/services/image-service.service';
 
 
 describe('PersonViewerComponent', () => {
@@ -30,6 +31,7 @@ describe('PersonViewerComponent', () => {
 
   let locationStub;
   let personServiceStub;
+  let imageServiceStub;
   let routerStub;
   let route$;
 
@@ -44,6 +46,7 @@ describe('PersonViewerComponent', () => {
   beforeEach(async(() => {
     locationStub = jasmine.createSpyObj('Location', ['back']);
     personServiceStub = jasmine.createSpyObj('PersonService', ['getById', 'remove', 'add', 'update']);
+    imageServiceStub = jasmine.createSpyObj('ImageServiceService', ['getBase64']);
     routerStub = jasmine.createSpyObj('Router', ['navigate']);
     route$ = new BehaviorSubject(undefined);
 
@@ -68,6 +71,7 @@ describe('PersonViewerComponent', () => {
         { provide: Location, useValue: locationStub },
         { provide: Router, useValue: routerStub },
         { provide: PersonService, useValue: personServiceStub },
+        { provide: ImageServiceService, useValue: imageServiceStub },
         { provide: ActivatedRoute, useValue: { paramMap: route$.asObservable() } },
       ],
     })
@@ -89,6 +93,13 @@ describe('PersonViewerComponent', () => {
     picture = fixture.debugElement.query(By.css('#picture'));
     errorNameRequired = fixture.debugElement.query(By.css('#error-name-required'));
     errorPictureRequired = fixture.debugElement.query(By.css('#error-pic-required'));
+  }
+
+  function simulateFileInput(file, base64Image): jasmine.Spy<InferableFunction> {
+    const filesSpy = spyOnProperty(inputPicture.nativeElement, 'files').and.returnValue([file]);
+    imageServiceStub.getBase64.and.returnValue(Promise.resolve(base64Image));
+    inputPicture.nativeElement.dispatchEvent(new Event('change'));
+    return filesSpy;
   }
 
   describe('new person', () => {
@@ -136,28 +147,35 @@ describe('PersonViewerComponent', () => {
       expect(errorNameRequired).toBeNull();
     });
 
-    it('onFileInput sets a temporary picture', () => {
+    it('removes required error when picture is added', fakeAsync(() => {
       expect(errorPictureRequired).not.toBeNull();
-      inputPicture.nativeElement.dispatchEvent(new Event('change'));
+      const newImage = 'data:image/jpg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD//gATQ3JlYXRlZCB3';
+      const file = new File([], 'test');
+      const filesSpy = simulateFileInput(file, newImage);
+      tick();
       fixture.detectChanges();
-      expect(
-        picture.nativeElement.src.startsWith('data:image/jpg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD//gATQ3JlYXRlZCB3aXRoIEdJTVD/2wBDAAMCAg')
-      ).toBeTruthy();
+      expect(filesSpy).toHaveBeenCalled();
+      expect(imageServiceStub.getBase64).toHaveBeenCalledWith(file, true);
+      expect(picture.nativeElement.src).toEqual(newImage);
       reloadDebugElements();
       expect(btnSave.nativeElement.disabled).toBeTruthy();
       expect(errorPictureRequired).toBeNull();
-    });
+      flush();
+    }));
 
     it('saves new person and navigates to editor', fakeAsync(() => {
       inputName.nativeElement.value = 'Jon Doe';
       inputName.nativeElement.dispatchEvent(new Event('input'));
-      inputPicture.nativeElement.dispatchEvent(new Event('change'));
+      const newImage = 'data:image/jpg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD//gATQ3JlYXRlZCB3';
+      const file = new File([], 'test');
+      simulateFileInput(file, newImage);
+      tick();
       fixture.detectChanges();
       expect(btnSave.nativeElement.disabled).toBeFalsy();
       personServiceStub.add.and.callFake((person: Person) => {
         expect(person.name).toEqual('Jon Doe');
         expect(person.id).toBeNull();
-        expect(person.picture.startsWith('/9j/4AAQSkZJRgABAQEBLAEsAAD//gATQ3JlYXRlZCB3aXRoIEdJTVD/2wBDAAMCAg')).toBeTruthy();
+        expect(person.picture).toEqual(newImage);
         expect(person.score).toEqual(0);
         person.id = 12;
         return Promise.resolve(person);
@@ -182,7 +200,7 @@ describe('PersonViewerComponent', () => {
 
     beforeEach(fakeAsync(() => {
       route$.next(convertToParamMap({ id: 42 }));
-      personServiceStub.getById.and.returnValue(Promise.resolve(new Person('Jon Doe', 'abc', 42, 5)));
+      personServiceStub.getById.and.returnValue(Promise.resolve(new Person('Jon Doe', 'data:image/jpg;base64,abc', 42, 5)));
       fixture.detectChanges();
       tick();
       fixture.detectChanges();
@@ -232,7 +250,7 @@ describe('PersonViewerComponent', () => {
       expect(btnSave.nativeElement.disabled).toBeTruthy();
     });
 
-    it('removes required error when name is entered', () => {
+    it('removes required error when new name is entered', () => {
       inputName.nativeElement.value = 'Jon Doe';
       inputName.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
@@ -240,15 +258,20 @@ describe('PersonViewerComponent', () => {
       expect(errorNameRequired).toBeNull();
     });
 
-    it('onFileInput does nothing', () => {
+    it('removes required error when picture is changed', fakeAsync(() => {
       expect(errorPictureRequired).toBeNull();
-      inputPicture.nativeElement.dispatchEvent(new Event('change'));
+      const newImage = 'data:image/jpg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD//gATQ3JlYXRlZCB3';
+      const file = new File([], 'test');
+      const filesSpy = simulateFileInput(file, newImage);
+      tick();
       fixture.detectChanges();
-      expect(picture.nativeElement.src).toEqual('data:image/jpg;base64,abc');
+      expect(picture.nativeElement.src).toEqual(newImage);
+      expect(filesSpy).toHaveBeenCalled();
+      expect(imageServiceStub.getBase64).toHaveBeenCalledWith(file, true);
       reloadDebugElements();
-      expect(btnSave.nativeElement.disabled).toBeTruthy();
+      expect(btnSave.nativeElement.disabled).toBeFalsy();
       expect(errorPictureRequired).toBeNull();
-    });
+    }));
 
     it('saves new name', fakeAsync(() => {
       personServiceStub.update.and.callFake((person: Person) => {
@@ -256,6 +279,22 @@ describe('PersonViewerComponent', () => {
         return Promise.resolve(true);
       });
       inputNewName();
+      fixture.detectChanges();
+      btnSave.nativeElement.click();
+      fixture.detectChanges();
+      tick();
+      expect(personServiceStub.update).toHaveBeenCalled();
+      flush();
+    }));
+
+    it('saves new picture', fakeAsync(() => {
+      const newImage = 'data:image/jpg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD//gATQ3JlYXRlZCB3';
+      personServiceStub.update.and.callFake((person: Person) => {
+        expect(person.picture).toEqual(newImage);
+        return Promise.resolve(true);
+      });
+      simulateFileInput(new File([], 'test'), newImage);
+      tick();
       fixture.detectChanges();
       btnSave.nativeElement.click();
       fixture.detectChanges();
