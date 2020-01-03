@@ -30,6 +30,7 @@ describe('SmallPersonCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SmallPersonCardComponent);
     component = fixture.componentInstance;
+    // TODO set person with component.person = ...;
     fixture.detectChanges();
   });
 

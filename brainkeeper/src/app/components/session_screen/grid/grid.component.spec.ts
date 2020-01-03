@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 describe('GridComponent', () => {
@@ -45,7 +47,12 @@ describe('GridComponent', () => {
     sessionStub = sessionMock.object;
 
     TestBed.configureTestingModule({
-      declarations: [ GridComponent, PersonNameComponent, SmallPersonCardComponent, BigPersonCardComponent ],
+      declarations: [
+        GridComponent,
+        PersonNameComponent,
+        SmallPersonCardComponent,
+        BigPersonCardComponent,
+      ],
       providers: [
         { provide: SessionService, useValue: sessionStub }
       ],
@@ -55,6 +62,7 @@ describe('GridComponent', () => {
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
+        MatDialogModule,
       ]
     })
     .compileComponents();
