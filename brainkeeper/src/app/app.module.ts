@@ -19,6 +19,12 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { PersonsComponent } from './components/persons/persons.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { StartComponent } from './components/start/start.component';
+// npm install ng2-img-max blueimp-canvas-to-blob --save
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+// npm install ng2-pica --save
+import { Ng2PicaModule } from 'ng2-pica';
+// npm install --save-dev @types/node
+import * as FS from 'fs';
 
 @NgModule({
   declarations: [
@@ -38,6 +44,8 @@ import { StartComponent } from './components/start/start.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    Ng2ImgMaxModule,
+    Ng2PicaModule,
   ],
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
