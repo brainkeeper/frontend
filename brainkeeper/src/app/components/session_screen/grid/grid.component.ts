@@ -11,8 +11,6 @@ import { Person } from 'src/app/classes/person';
 export class GridComponent implements OnInit {
 
   chosenPerson: Person;
-  public personNames: string[];
-  public personPictures: string[];
   public isRightPerson = true;
   private _persons: Person[];
 

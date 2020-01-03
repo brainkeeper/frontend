@@ -13,15 +13,15 @@ describe('SmallPersonCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SmallPersonCardComponent, Person ],
+      declarations: [ SmallPersonCardComponent ],
       imports: [
         MatButtonModule,
         MatToolbarModule,
-        MatIconModule,
+        MatIconModule
       ],
       providers: [
         { provide: Location },
-        { provide: Router },
+        { provide: Router }
       ],
     })
     .compileComponents();
