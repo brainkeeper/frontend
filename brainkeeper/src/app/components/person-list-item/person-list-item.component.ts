@@ -10,6 +10,8 @@ export class PersonListItemComponent implements OnInit {
 
   @Input()
   public person: Person;
+  @Input()
+  public showScore: boolean;
 
   constructor() {
     // this.person = new Person('Omaaaaa', 'assets/testpic.png', 1);

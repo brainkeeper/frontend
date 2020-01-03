@@ -3,7 +3,7 @@
       <div class="person_name">
         {{person.name}}
       </div>
-      <div class="person_score">
+      <div *ngIf="showScore" class="person_score">
         {{person.score}}
       </div>
 </div>
