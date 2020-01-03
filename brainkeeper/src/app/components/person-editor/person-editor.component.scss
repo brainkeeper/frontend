@@ -1,0 +1,48 @@
+@import '../../../styles.scss';
+
+$primary: map-get($brainkeeper-theme, primary);
+$accent: map-get($brainkeeper-theme, accent);
+$warn: map-get($brainkeeper-theme, warn);
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+mat-card-actions {
+    display: flex;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-icon {
+    font-size: 1.3em!important;
+}
+
+#card {
+    max-width: 500px;
+    width: 100%;
+}
+
+#error-pic-required {
+    margin-bottom: 16px;
+}
+
+#btn-change-picture {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+#picture.placeholder {
+    width: calc(100% + 24px);
+
+}
+
+#picture.required {
+    border: 5px solid #f44336;
+    border-radius: 5px;    
+}

@@ -12,11 +12,12 @@ describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
   let fixture: ComponentFixture<NavigationBarComponent>;
 
-  const locationStub = {
-    back: jasmine.createSpy('back')
-  };
+  let locationStub;
 
   beforeEach(async(() => {
+    locationStub = {
+      back: jasmine.createSpy('back')
+    };
     TestBed.configureTestingModule({
       declarations: [
         NavigationBarComponent,
@@ -56,6 +57,28 @@ describe('NavigationBarComponent', () => {
     fixture.detectChanges();
     fixture.debugElement.query(By.css('button')).nativeElement.click();
     expect(locationStub.back).toHaveBeenCalled();
+  });
+
+  it('click on back button emits event', (done) => {
+    component.showBackButton = true;
+    fixture.detectChanges();
+    component.backClicked.subscribe(goBack => {
+        expect(locationStub.back).not.toHaveBeenCalled();
+        done();
+    });
+    fixture.debugElement.query(By.css('button')).nativeElement.click();
+  });
+
+  it('subscriber to backClicked can navigate back', (done) => {
+    component.showBackButton = true;
+    fixture.detectChanges();
+    component.backClicked.subscribe(goBack => {
+        expect(locationStub.back).not.toHaveBeenCalled();
+        goBack();
+        expect(locationStub.back).toHaveBeenCalledTimes(1);
+        done();
+    });
+    fixture.debugElement.query(By.css('button')).nativeElement.click();
   });
 
   it('default title is BRAINKEEPER', () => {
