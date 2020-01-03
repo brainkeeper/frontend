@@ -53,6 +53,8 @@ describe('ImageServiceService', () => {
       .then(blob => new File([blob], 'test.jpg', { type: 'jpg'}));
 
       const res = await service.getBase64( file, true );
+      console.log(res);
+      console.log(file.size + ', ' + res.length);
       expect(file.size > res.length).toEqual(true);
     });
   });
