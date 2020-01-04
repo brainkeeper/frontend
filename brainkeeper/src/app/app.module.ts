@@ -35,8 +35,6 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 // npm install ng2-pica --save
 import { Ng2PicaModule } from 'ng2-pica';
-// npm install --save-dev @types/node
-import * as FS from 'fs';
 
 @NgModule({
   declarations: [
