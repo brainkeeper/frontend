@@ -92,7 +92,7 @@ export class PersonEditorComponent implements OnInit {
   }
 
   private async onFileInput($event) {
-    this.picture.setValue(await this.imageService.getBase64($event.target.files[0], true));
+    this.picture.setValue(await this.imageService.getBase64($event.target.files[0], 800, 800, 0.8));
   }
 
   private updateFormControl() {
