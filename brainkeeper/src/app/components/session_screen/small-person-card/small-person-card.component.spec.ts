@@ -6,6 +6,8 @@ import { Person } from 'src/app/classes/person';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('SmallPersonCardComponent', () => {
   let component: SmallPersonCardComponent;
@@ -30,12 +32,18 @@ describe('SmallPersonCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SmallPersonCardComponent);
     component = fixture.componentInstance;
-    // TODO set person with component.person = ...;
     component.person = new Person('Tatzelwurm', 'TatzelwurmSeinBild');
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should be no component when person is null', () => {
+    fixture.whenStable();
+    component.person = null;
+    fixture.detectChanges();
+    const bannerDe: DebugElement = fixture.debugElement;
+    expect(bannerDe.query(By.css('.small-card'))).toBeNull();
   });
 });
