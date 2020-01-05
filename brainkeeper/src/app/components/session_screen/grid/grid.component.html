@@ -1,5 +1,5 @@
 <app-person-name></app-person-name>
-<div class="container">
+<div class="container" *ngIf = "persons">
     <app-small-person-card (click)="clickedPicture(0)" [person] = persons[0]></app-small-person-card>
     <app-small-person-card (click)="clickedPicture(1)" [person] = persons[1]></app-small-person-card>
     <app-small-person-card (click)="clickedPicture(2)" [person] = persons[2]></app-small-person-card>
@@ -8,7 +8,7 @@
     <app-small-person-card (click)="clickedPicture(5)" [person] = persons[5]></app-small-person-card>
 </div>
 
-<div>
+<div *ngIf = "chosenPerson">
     <app-big-person-card [isRight] = isRightPerson [chosenPerson] = "chosenPerson" ></app-big-person-card>
 </div>
 

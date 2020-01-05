@@ -88,6 +88,7 @@ describe('GridComponent', () => {
 
   describe('clicked pictures', () => {
     it('stays in the round if the wrong picture is clicked', async () => {
+      await fixture.whenStable();
       await component.clickedPicture(3);
       sessionMock.verify(s => s.checkPerson(3), TypeMoq.Times.once());
       sessionMock.verify(s => s.finishRound(), TypeMoq.Times.exactly(0));
@@ -95,6 +96,7 @@ describe('GridComponent', () => {
     });
 
     it('starts a new round when the correct person is clicked', async () => {
+      await fixture.whenStable();
       await component.clickedPicture(2);
       sessionMock.verify(s => s.checkPerson(2), TypeMoq.Times.once());
       sessionMock.verify(s => s.finishRound(), TypeMoq.Times.once());
