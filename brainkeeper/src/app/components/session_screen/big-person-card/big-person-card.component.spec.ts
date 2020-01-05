@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { Person } from 'src/app/classes/person';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('BigPersonCardComponent', () => {
   let component: BigPersonCardComponent;
@@ -50,5 +53,35 @@ describe('BigPersonCardComponent', () => {
     component.open();
     expect(component.clicked).toBe(false);
     expect(component.show).toBe(true);
+  });
+  it('should make frame green', async () => {
+    fixture.whenStable();
+    component.chosenPerson = new Person('Hulu-Zulu', 'Bild von HuluZulu');
+    component.isRight = true;
+    component.show = true;
+    fixture.detectChanges();
+    const bannerDe: DebugElement = fixture.debugElement;
+    expect(bannerDe.query(By.css('.big-card-wrong'))).toBeNull();
+    expect(bannerDe.query(By.css('.big-card-right'))).toBeTruthy();
+  });
+  it('should make frame red', async () => {
+    fixture.whenStable();
+    component.chosenPerson = new Person('Hulu-Zulu', 'Bild von HuluZulu');
+    component.isRight = false;
+    component.show = true;
+    fixture.detectChanges();
+    const bannerDe: DebugElement = fixture.debugElement;
+    expect(bannerDe.query(By.css('.big-card-right'))).toBeNull();
+    expect(bannerDe.query(By.css('.big-card-wrong'))).toBeTruthy();
+  });
+  it('should make be right name', async () => {
+    fixture.whenStable();
+    component.chosenPerson = new Person('Hulu-Zulu', 'Bild von HuluZulu');
+    component.isRight = false;
+    component.show = true;
+    fixture.detectChanges();
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const title = bannerElement.querySelector('mat-card-title');
+    expect(title.textContent).toEqual('Hulu-Zulu');
   });
 });
