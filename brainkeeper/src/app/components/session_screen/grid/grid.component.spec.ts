@@ -73,8 +73,6 @@ describe('GridComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(GridComponent);
     component = fixture.componentInstance;
-    component.chosenPerson = new Person('John Doe', 'JohnDoeSeiBuidl');
-    component.isRightPerson = true;
     fixture.detectChanges();
   });
 

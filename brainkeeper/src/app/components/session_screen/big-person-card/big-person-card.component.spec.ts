@@ -40,4 +40,15 @@ describe('BigPersonCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should make clicked true', async () => {
+    component.close();
+    expect(component.clicked).toBe(true);
+    expect(component.show).toBe(false);
+  });
+  it('should make clicked false', async () => {
+    component.clicked = true;
+    component.open();
+    expect(component.clicked).toBe(false);
+    expect(component.show).toBe(true);
+  });
 });
