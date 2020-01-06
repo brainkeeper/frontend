@@ -36,9 +36,6 @@ export class ImageService {
         img.src = dataURL;
         resolve(this.changeImage(img, file.type === 'jpg' ? 'jpeg' : 'png', width, height, quality));
       };
-      reader.onerror = () => {
-        reject( new Error('In the image conversion went something wrong.') );
-      };
     });
   }
 
@@ -68,9 +65,6 @@ export class ImageService {
 
         const response = resizingCanvas.toDataURL('image/' + type, quality);
         resolve(response);
-      };
-      img.onerror = () => {
-        reject( new Error('In the image compression went something wrong.') );
       };
     });
   }
