@@ -21,8 +21,6 @@
     "@angular/platform-browser": "~8.2.9",
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "^8.2.14",
-    "blueimp-canvas-to-blob": "^3.17.0",
-    "compress.js": "^1.1.2",
     "dexie": "^2.0.4",
     "ng2-img-max": "^2.1.18",
     "ng2-pica": "^1.2.12",
