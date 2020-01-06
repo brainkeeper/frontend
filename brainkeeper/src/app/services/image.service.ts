@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { createOptional } from '@angular/compiler/src/core';
 
 
 @Injectable({
@@ -33,13 +34,6 @@ export class ImageService {
       reader.onload = () => {
         const dataURL = reader.result.toString();
         img.src = dataURL;
-
-        if (width === 0) {
-          width = img.width;
-        }
-        if (height === 0) {
-          height = img.height;
-        }
         resolve(this.changeImage(img, file.type === 'jpg' ? 'jpeg' : 'png', width, height, quality));
       };
       reader.onerror = () => {
@@ -56,11 +50,21 @@ export class ImageService {
         const resizingCanvas: HTMLCanvasElement = document.createElement('canvas');
         const resizingCanvasContext = resizingCanvas.getContext('2d');
 
-        resizingCanvas.width = img.width;
-        resizingCanvas.height = img.height;
+        const newWidth = width === 0 ? img.width : width;
+        const newHeight = height === 0 ? img.height : height;
+        const dx = Math.floor(0.5 * (img.width -  newWidth));
+        const dy = Math.floor(0.5 * (img.height - newHeight));
 
-        resizingCanvasContext.drawImage(img, 0, 0,
-          resizingCanvas.width, resizingCanvas.height);
+        resizingCanvas.width = img.width - 2 * dx;
+        resizingCanvas.height = img.height - 2 * dy;
+
+        resizingCanvasContext.drawImage(
+          img,
+          dx, dy,
+          img.width - dx, img.height - dy,
+          0, 0,
+          resizingCanvas.width, resizingCanvas.height
+          );
 
         const response = resizingCanvas.toDataURL('image/' + type, quality);
         resolve(response);

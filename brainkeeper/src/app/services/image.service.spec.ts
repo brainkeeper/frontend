@@ -81,7 +81,7 @@ describe('ImageService', () => {
       .then(r => r.blob()) // Gets the response and returns it as a file
       .then(blob => new File([blob], 'test.jpg', { type: 'jpg'}));
 
-      const res = await service.getBase64( file, 100, 100, 0.25);
+      const res = await service.getBase64( file, 100, 100, 0.75);
       expect(file.size > res.length).toEqual(true);
     });
   });
@@ -99,12 +99,12 @@ describe('ImageService', () => {
       expect(want).toEqual(res);
     });
     it('resizes an image', async () => {
-      // tick(1000);
       const file = await fetch('https://i.imgur.com/gNue8Za.jpg')
       .then(r => r.blob()) // Gets the response and returns it as a file
       .then(blob => new File([blob], 'test.jpg', { type: 'jpg'}));
 
-      const res = await service.getBase64( file, 400, 400, 0.25);
+      const res = await service.getBase64( file, 200, 200, 0.75);
+      console.log(res);
       expect(file.size > res.length).toEqual(true);
     });
   });
