@@ -47,8 +47,10 @@ export class ImageService {
         const resizingCanvas: HTMLCanvasElement = document.createElement('canvas');
         const resizingCanvasContext = resizingCanvas.getContext('2d');
 
-        const newWidth = width === 0 ? img.width : width;
-        const newHeight = height === 0 ? img.height : height;
+        const bigger = Math.max(img.width, img.height);
+
+        const newWidth = width === 0 ? bigger : width;
+        const newHeight = height === 0 ? bigger : height;
         const dx = Math.floor(0.5 * (img.width -  newWidth));
         const dy = Math.floor(0.5 * (img.height - newHeight));
 
@@ -61,7 +63,17 @@ export class ImageService {
           img.width - 2 * dx, img.height - 2 * dy,
           0, 0,
           resizingCanvas.width, resizingCanvas.height
-          );
+        );
+        if (width === 0 || height === 0) {
+          resizingCanvasContext.fillStyle = 'white';
+          if (bigger === img.width) {
+            resizingCanvasContext.fillRect(0, 0, img.width, Math.abs(dy));
+            resizingCanvasContext.fillRect(0, Math.abs(dy) + img.height, img.width, Math.abs(dy));
+          } else {
+            resizingCanvasContext.fillRect(0, 0, Math.abs(dx), img.height);
+            resizingCanvasContext.fillRect(Math.abs(dx) + img.width, 0, Math.abs(dx), img.height);
+          }
+        }
 
         const response = resizingCanvas.toDataURL('image/' + type, quality);
         resolve(response);
