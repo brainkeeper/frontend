@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmDeleteComponent } from '../dialogs/dialog-confirm-delete/dialog-confirm-delete.component';
 import { DialogConfirmExitComponent } from '../dialogs/dialog-confirm-exit/dialog-confirm-exit.component';
-import { ImageServiceService } from 'src/app/services/image-service.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-person-editor',
@@ -27,7 +27,7 @@ export class PersonEditorComponent implements OnInit {
 
   constructor(
     private personService: PersonService,
-    private imageService: ImageServiceService,
+    private imageService: ImageService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,

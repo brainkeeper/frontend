@@ -20,7 +20,7 @@ import { DialogConfirmDeleteComponent } from '../dialogs/dialog-confirm-delete/d
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { PersonEditorComponent } from './person-editor.component';
 import { DialogConfirmExitComponent } from '../dialogs/dialog-confirm-exit/dialog-confirm-exit.component';
-import { ImageServiceService } from 'src/app/services/image-service.service';
+import { ImageService } from 'src/app/services/image.service';
 
 
 describe('PersonViewerComponent', () => {
@@ -71,7 +71,7 @@ describe('PersonViewerComponent', () => {
         { provide: Location, useValue: locationStub },
         { provide: Router, useValue: routerStub },
         { provide: PersonService, useValue: personServiceStub },
-        { provide: ImageServiceService, useValue: imageServiceStub },
+        { provide: ImageService, useValue: imageServiceStub },
         { provide: ActivatedRoute, useValue: { paramMap: route$.asObservable() } },
       ],
     })
