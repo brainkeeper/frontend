@@ -19,7 +19,6 @@ export class BigPersonCardComponent implements OnInit {
   ngOnInit() {
   }
 
-
   close() {
      this.show = false;
      this.clicked = true;
@@ -31,5 +30,4 @@ export class BigPersonCardComponent implements OnInit {
       this.clicked = false;
     }
   }
-
 }

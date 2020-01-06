@@ -46,4 +46,11 @@ describe('SmallPersonCardComponent', () => {
     const bannerDe: DebugElement = fixture.debugElement;
     expect(bannerDe.query(By.css('.small-card'))).toBeNull();
   });
+  it('should be right picture', () => {
+    fixture.whenStable();
+    component.person = new Person('Oma', 'src/assets/renter_test.png');
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('div.card>img').src).toContain('src/assets/renter_test.png');
+  });
 });
