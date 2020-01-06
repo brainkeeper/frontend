@@ -58,7 +58,7 @@ export class ImageService {
         resizingCanvasContext.drawImage(
           img,
           dx, dy,
-          img.width - dx, img.height - dy,
+          img.width - 2 * dx, img.height - 2 * dy,
           0, 0,
           resizingCanvas.width, resizingCanvas.height
           );
