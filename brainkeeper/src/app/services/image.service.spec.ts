@@ -1,10 +1,10 @@
-import { TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import { ImageServiceService } from './image-service.service';
+import { ImageService } from './image.service';
 
 
-describe('ImageServiceService', () => {
-  const service = new ImageServiceService();
+describe('ImageService', () => {
+  const service = new ImageService();
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {

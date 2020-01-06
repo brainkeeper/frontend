@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 
-export class ImageServiceService {
+export class ImageService {
 
   constructor() {  }
 
@@ -43,7 +43,7 @@ export class ImageServiceService {
         resolve(this.changeImage(img, file.type === 'jpg' ? 'jpeg' : 'png', width, height, quality));
       };
       reader.onerror = () => {
-        throw new Error('In the image conversion went something wrong.');
+        reject( new Error('In the image conversion went something wrong.') );
       };
     });
   }
@@ -64,6 +64,9 @@ export class ImageServiceService {
 
         const response = resizingCanvas.toDataURL('image/' + type, quality);
         resolve(response);
+      };
+      img.onerror = () => {
+        reject( new Error('In the image compression went something wrong.') );
       };
     });
   }
