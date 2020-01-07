@@ -14,7 +14,6 @@ export class PersonListItemComponent implements OnInit {
   public showScore: boolean;
 
   constructor() {
-    // this.person = new Person('Omaaaaa', 'assets/testpic.png', 1);
   }
 
   ngOnInit() {
