@@ -155,7 +155,7 @@ describe('PersonViewerComponent', () => {
       tick();
       fixture.detectChanges();
       expect(filesSpy).toHaveBeenCalled();
-      expect(imageServiceStub.getBase64).toHaveBeenCalledWith(file, 800, 800, 0.8);
+      expect(imageServiceStub.getBase64).toHaveBeenCalledWith(file, 0, 0, 0.8);
       expect(picture.nativeElement.src).toEqual(newImage);
       reloadDebugElements();
       expect(btnSave.nativeElement.disabled).toBeTruthy();
@@ -267,7 +267,7 @@ describe('PersonViewerComponent', () => {
       fixture.detectChanges();
       expect(picture.nativeElement.src).toEqual(newImage);
       expect(filesSpy).toHaveBeenCalled();
-      expect(imageServiceStub.getBase64).toHaveBeenCalledWith(file, 800, 800, 0.8);
+      expect(imageServiceStub.getBase64).toHaveBeenCalledWith(file, 0, 0, 0.8);
       reloadDebugElements();
       expect(btnSave.nativeElement.disabled).toBeFalsy();
       expect(errorPictureRequired).toBeNull();
