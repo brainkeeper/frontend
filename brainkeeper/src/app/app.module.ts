@@ -31,11 +31,6 @@ import { PersonEditorComponent } from './components/person-editor/person-editor.
 import { DialogConfirmDeleteComponent } from './components/dialogs/dialog-confirm-delete/dialog-confirm-delete.component';
 import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-exit/dialog-confirm-exit.component';
 
-// npm install ng2-img-max blueimp-canvas-to-blob --save
-import { Ng2ImgMaxModule } from 'ng2-img-max';
-// npm install ng2-pica --save
-import { Ng2PicaModule } from 'ng2-pica';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,8 +58,6 @@ import { Ng2PicaModule } from 'ng2-pica';
     MatSnackBarModule,
     MatDialogModule,
     ReactiveFormsModule,
-    Ng2ImgMaxModule,
-    Ng2PicaModule,
   ],
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
