@@ -30,6 +30,10 @@ $brainkeeper-theme: mat-light-theme($brainkeeper-primary, $brainkeeper-accent, $
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Work Sans', sans-serif; }
+* { font-family: 'Work Sans', sans-serif;}
+.material-icons {
+    font-family: 'Material Icons';
+}
 
 @font-face{
     font-family: Opticon_One;
@@ -37,8 +41,3 @@ body { margin: 0; font-family: 'Work Sans', sans-serif; }
 }
 
 $config: mat-typography-config();
-
-.brainkeeper-title {
-    font-size: mat-font-size($config, headline);
-    font-family: 'Opticon_One';
-}
