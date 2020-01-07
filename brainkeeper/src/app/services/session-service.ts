@@ -13,6 +13,7 @@ export class SessionService {
     private _round: number;
     private _correctPerson: Person;
     private _selectedPersons: Person[];
+    private attempts: number;
 
     constructor(private personService: PersonService) {
         this._round = 0;
@@ -56,6 +57,7 @@ export class SessionService {
         await this.selectSix();
         this.chooseCorrectPerson();
         this._round++;
+        this.attempts = 0;
     }
 
     private async selectSix(): Promise<void> {
@@ -73,11 +75,15 @@ export class SessionService {
 
     public checkPerson(index: number): boolean {
         const selectedPerson =  this.persons[index];
+        this.attempts++;
         return selectedPerson === this.correctPerson;
     }
 
     public finishRound(): void {
-        this.correctPerson.score += 1;
+        if (this.attempts < 3) {
+            this.correctPerson.score += 1;
+            this.personService.update(this.correctPerson);
+        }
     }
 
     public isSessionFinished(): boolean {

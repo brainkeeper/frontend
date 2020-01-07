@@ -3,6 +3,8 @@ import { SessionService } from './session-service';
 import * as TypeMoq from 'typemoq';
 import { PersonService } from './person-service';
 import { PersistentPersonService } from './persistent-person.service';
+import { Person } from '../classes/person';
+import { async } from '@angular/core/testing';
 
 describe('SessionService', () => {
 
@@ -23,6 +25,7 @@ describe('SessionService', () => {
         personServiceMock.setup(s => s.getSixRandom()).returns(() => new Promise((resolve, reject) => {
             resolve(persons);
         }));
+        personServiceMock.setup(s => s.update(TypeMoq.It.isAny()));
         startedService = new SessionService(personServiceMock.object);
         await startedService.startNextRound();
     });
@@ -116,6 +119,47 @@ describe('SessionService', () => {
             const score = person.score;
             startedService.finishRound();
             expect(person.score).toBe(score + 1);
+        });
+
+        it('increases the score if 2 attempts or less have been made', () => {
+            const person = startedService.correctPerson;
+            const score = person.score;
+            const wrongIndex = persons.findIndex(pers => pers !== person);
+            startedService.checkPerson(wrongIndex);
+            startedService.checkPerson(wrongIndex);
+            startedService.finishRound();
+            expect(person.score).toBe(score + 1);
+        });
+
+        it('increases the score not if 3 attempts or more have been made', () => {
+            const person = startedService.correctPerson;
+            const score = person.score;
+            const wrongIndex = persons.findIndex(pers => pers !== person);
+            startedService.checkPerson(wrongIndex);
+            startedService.checkPerson(wrongIndex);
+            startedService.checkPerson(wrongIndex);
+            startedService.finishRound();
+            personServiceMock.verify(p => p.update(person), TypeMoq.Times.never());
+            expect(person.score).toBe(score);
+        });
+
+        it('calls the update function of the personService', () => {
+            const person = startedService.correctPerson;
+            startedService.finishRound();
+            personServiceMock.verify(p => p.update(person), TypeMoq.Times.exactly(1));
+            expect(persons).toContain(person);
+        });
+
+        it('updates the new correct person in the next round', async () => {
+            const person = startedService.correctPerson;
+            startedService.finishRound();
+            await startedService.startNextRound();
+            const person2 = startedService.correctPerson;
+            startedService.finishRound();
+            personServiceMock.verify(p => p.update(person), TypeMoq.Times.atLeastOnce());
+            personServiceMock.verify(p => p.update(person2), TypeMoq.Times.atLeastOnce());
+            expect(persons).toContain(person);
+            expect(persons).toContain(person2);
         });
     });
 
