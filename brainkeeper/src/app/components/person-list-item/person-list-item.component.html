@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf='person' class="container">
     <img class="picture" src={{person.picture}} alt="Photo of selected Person">
      <div class="person_name">
        {{person.name}}
@@ -6,4 +6,7 @@
      <div *ngIf="showScore" class="person_score">
        {{person.score}}
      </div>
+     <button *ngIf="showScore == false" id="edit_button" (click)="onEditClicked(person.id)">
+        <mat-icon>edit</mat-icon>
+     </button>
 </div>
