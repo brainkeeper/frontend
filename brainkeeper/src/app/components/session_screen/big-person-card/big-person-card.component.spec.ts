@@ -43,45 +43,41 @@ describe('BigPersonCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should make clicked true', async () => {
     component.close();
     expect(component.clicked).toBe(true);
     expect(component.show).toBe(false);
   });
+
   it('should make clicked false', async () => {
     component.clicked = true;
     component.open();
     expect(component.clicked).toBe(false);
     expect(component.show).toBe(true);
   });
-  it('should make frame green', async () => {
+
+  it('should display the wrong name, with red border', async () => {
+    fixture.whenStable();
+    component.chosenPerson = new Person('Hulu-Zulu', 'Bild von HuluZulu');
+    component.isRight = false;
+    component.show = true;
+    fixture.detectChanges();
+    const title = fixture.nativeElement.querySelector('mat-card-title');
+    expect(title.textContent).toEqual(`No, that's Hulu-Zulu! Please try again.`);
+    expect(fixture.debugElement.query(By.css('.big-card.right'))).toBeNull();
+    expect(fixture.debugElement.query(By.css('.big-card.wrong'))).toBeTruthy();
+  });
+
+  it('should display the right name, with green border', async () => {
     fixture.whenStable();
     component.chosenPerson = new Person('Hulu-Zulu', 'Bild von HuluZulu');
     component.isRight = true;
     component.show = true;
     fixture.detectChanges();
-    const bannerDe: DebugElement = fixture.debugElement;
-    expect(bannerDe.query(By.css('.big-card-wrong'))).toBeNull();
-    expect(bannerDe.query(By.css('.big-card-right'))).toBeTruthy();
-  });
-  it('should make frame red', async () => {
-    fixture.whenStable();
-    component.chosenPerson = new Person('Hulu-Zulu', 'Bild von HuluZulu');
-    component.isRight = false;
-    component.show = true;
-    fixture.detectChanges();
-    const bannerDe: DebugElement = fixture.debugElement;
-    expect(bannerDe.query(By.css('.big-card-right'))).toBeNull();
-    expect(bannerDe.query(By.css('.big-card-wrong'))).toBeTruthy();
-  });
-  it('should make be right name', async () => {
-    fixture.whenStable();
-    component.chosenPerson = new Person('Hulu-Zulu', 'Bild von HuluZulu');
-    component.isRight = false;
-    component.show = true;
-    fixture.detectChanges();
-    const bannerElement: HTMLElement = fixture.nativeElement;
-    const title = bannerElement.querySelector('mat-card-title');
-    expect(title.textContent).toEqual('Hulu-Zulu');
+    const title = fixture.nativeElement.querySelector('mat-card-title');
+    expect(title.textContent).toEqual(`Yes, that's Hulu-Zulu!`);
+    expect(fixture.debugElement.query(By.css('.big-card.right'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('.big-card.wrong'))).toBeNull();
   });
 });
