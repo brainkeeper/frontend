@@ -4,6 +4,7 @@ import * as TypeMoq from 'typemoq';
 import { PersonService } from './person-service';
 import { PersistentPersonService } from './persistent-person.service';
 import { Person } from '../classes/person';
+import { async } from '@angular/core/testing';
 
 describe('SessionService', () => {
 
@@ -147,6 +148,18 @@ describe('SessionService', () => {
             startedService.finishRound();
             personServiceMock.verify(p => p.update(person), TypeMoq.Times.exactly(1));
             expect(persons).toContain(person);
+        });
+
+        it('updates the new correct person in the next round', async () => {
+            const person = startedService.correctPerson;
+            startedService.finishRound();
+            await startedService.startNextRound();
+            const person2 = startedService.correctPerson;
+            startedService.finishRound();
+            personServiceMock.verify(p => p.update(person), TypeMoq.Times.atLeastOnce());
+            personServiceMock.verify(p => p.update(person2), TypeMoq.Times.atLeastOnce());
+            expect(persons).toContain(person);
+            expect(persons).toContain(person2);
         });
     });
 
