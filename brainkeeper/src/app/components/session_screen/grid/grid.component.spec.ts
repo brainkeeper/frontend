@@ -6,6 +6,16 @@ import { GridComponent } from './grid.component';
 import { PersonNameComponent } from './../person-name/person-name.component';
 import { SessionService } from 'src/app/services/session-service';
 import { isNgTemplate } from '@angular/compiler';
+import { SmallPersonCardComponent } from 'src/app/components/session_screen/small-person-card/small-person-card.component';
+import { BigPersonCardComponent } from 'src/app/components/session_screen/big-person-card/big-person-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { Person } from 'src/app/classes/person';
 
 
 describe('GridComponent', () => {
@@ -14,6 +24,7 @@ describe('GridComponent', () => {
   let sessionMock: TypeMoq.IMock<SessionService>;
   let sessionStub: SessionService;
   let round: number;
+
 
   const persons = [
     new StorablePerson(1, 'John Doe', 'a').toPerson(),
@@ -38,9 +49,22 @@ describe('GridComponent', () => {
     sessionStub = sessionMock.object;
 
     TestBed.configureTestingModule({
-      declarations: [ GridComponent, PersonNameComponent ],
+      declarations: [
+        GridComponent,
+        PersonNameComponent,
+        SmallPersonCardComponent,
+        BigPersonCardComponent,
+      ],
       providers: [
         { provide: SessionService, useValue: sessionStub }
+      ],
+      imports: [
+        MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
       ]
     })
     .compileComponents();
@@ -64,6 +88,7 @@ describe('GridComponent', () => {
 
   describe('clicked pictures', () => {
     it('stays in the round if the wrong picture is clicked', async () => {
+      await fixture.whenStable();
       await component.clickedPicture(3);
       sessionMock.verify(s => s.checkPerson(3), TypeMoq.Times.once());
       sessionMock.verify(s => s.finishRound(), TypeMoq.Times.exactly(0));
@@ -71,6 +96,7 @@ describe('GridComponent', () => {
     });
 
     it('starts a new round when the correct person is clicked', async () => {
+      await fixture.whenStable();
       await component.clickedPicture(2);
       sessionMock.verify(s => s.checkPerson(2), TypeMoq.Times.once());
       sessionMock.verify(s => s.finishRound(), TypeMoq.Times.once());
