@@ -10,9 +10,9 @@
             </mat-card-header>
 
             <img *ngIf="isNew" mat-card-image
-                [src]="picture.value ? 'data:image/jpg;base64,' + picture.value : '/assets/person-24px.svg'"
+                [src]="picture.value ? picture.value : '/assets/person-24px.svg'"
                 id="picture" [ngClass]="{ 'required': picture.errors?.required, 'placeholder': !picture.value}">
-            <img *ngIf="!isNew" mat-card-image src="{{'data:image/jpg;base64,' + person.picture}}" id="picture"
+            <img *ngIf="!isNew" mat-card-image src="{{picture.value}}" id="picture"
                 alt="Photo of {{person.name}}">
 
             <mat-card-content>
