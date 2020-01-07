@@ -4,9 +4,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
+
+
+
+import { BigPersonCardComponent } from './components/session_screen/big-person-card/big-person-card.component';
+import {MatCardModule} from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +20,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { PersistentPersonService } from './services/persistent-person.service';
 import { PersonService } from './services/person-service';
 import { DatabaseService } from './services/database.service';
+import { SmallPersonCardComponent } from './components/session_screen/small-person-card/small-person-card.component';
 import { SessionService } from './services/session-service';
 
 import { AppComponent } from './app.component';
@@ -34,8 +39,10 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
 @NgModule({
   declarations: [
     AppComponent,
+    BigPersonCardComponent,
     GridComponent,
     PersonNameComponent,
+    SmallPersonCardComponent,
     SettingsComponent,
     StatisticsComponent,
     PersonsComponent,
@@ -58,6 +65,7 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
     MatSnackBarModule,
     MatDialogModule,
     ReactiveFormsModule,
+
   ],
   providers: [
     { provide: PersonService, useClass: PersistentPersonService, },
