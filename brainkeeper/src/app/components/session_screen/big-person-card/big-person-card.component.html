@@ -1,0 +1,31 @@
+<div *ngIf="isRight; else isWrong">
+  <div *ngIf = "show; else open()">
+    <div *ngIf = "chosenPerson" class = "big-card" (click)="close()">
+      <mat-card class="big-card-right" id = "bcardr" >
+          <mat-card-header>
+            <mat-card-title>{{chosenPerson.name}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="{{'data:image/jpg;base64,' + chosenPerson.picture}}" alt="Photo of the selected Person" class = "mat-card-image">
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)= "close()">CONTINUE</button>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #isWrong>
+  <div *ngIf = "show; else open()">
+    <div *ngIf = "chosenPerson" class="big-card" (click)="close()">
+      <mat-card class="big-card-wrong" id = "bcardw">
+          <mat-card-header>
+            <mat-card-title>{{chosenPerson.name}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="{{'data:image/jpg;base64,' + chosenPerson.picture}}" alt="Photo of the selected Person" class = "mat-card-image">
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)= "close()">BACK</button>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+  </div>
+</ng-template>

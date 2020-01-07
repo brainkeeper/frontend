@@ -10,6 +10,8 @@ import { Person } from 'src/app/classes/person';
 })
 export class GridComponent implements OnInit {
 
+  chosenPerson: Person;
+  isRightPerson = true;
   private _persons: Person[];
 
   public get persons() {
@@ -27,10 +29,15 @@ export class GridComponent implements OnInit {
     this._persons = this.sessionService.persons;
   }
 
+
   async clickedPicture(index: number): Promise<void> {
+    this.chosenPerson = this.persons[index];
     if (this.sessionService.checkPerson(index)) {
+      this.isRightPerson = true;
       this.sessionService.finishRound();
       await this.startRound();
+    } else {
+      this.isRightPerson = false;
     }
   }
 }
