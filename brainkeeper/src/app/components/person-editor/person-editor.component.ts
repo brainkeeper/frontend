@@ -47,7 +47,8 @@ export class PersonEditorComponent implements OnInit {
 
   private changed(): boolean {
     if (this.isNew) {
-      return true;
+      return this.name.value !== ''
+        || this.picture.value !== '';
     } else {
       return this.person.name !== this.name.value
         || this.person.picture !== this.picture.value;
