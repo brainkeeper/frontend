@@ -1,0 +1,19 @@
+.mat-list {
+  width: calc(100% - 30px);
+  padding: 15px;
+}
+
+#addPersonContainer {
+  display: flex;
+}
+
+#addPerson {
+  margin: auto;
+}
+
+#btn-add {
+  z-index: 100;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

@@ -23,7 +23,7 @@ import { DialogConfirmExitComponent } from '../dialogs/dialog-confirm-exit/dialo
 import { ImageService } from 'src/app/services/image.service';
 
 
-describe('PersonViewerComponent', () => {
+describe('PersonEditorComponent', () => {
   let component: PersonEditorComponent;
   let fixture: ComponentFixture<PersonEditorComponent>;
   let snackBar;
@@ -68,7 +68,6 @@ describe('PersonViewerComponent', () => {
         NoopAnimationsModule,
       ],
       providers: [
-        { provide: Location, useValue: locationStub },
         { provide: Router, useValue: routerStub },
         { provide: PersonService, useValue: personServiceStub },
         { provide: ImageService, useValue: imageServiceStub },
@@ -100,6 +99,11 @@ describe('PersonViewerComponent', () => {
     imageServiceStub.getBase64.and.returnValue(Promise.resolve(base64Image));
     inputPicture.nativeElement.dispatchEvent(new Event('change'));
     return filesSpy;
+  }
+
+  function inputNewName() {
+    inputName.nativeElement.value = 'New Name';
+    inputName.nativeElement.dispatchEvent(new Event('input'));
   }
 
   describe('new person', () => {
@@ -186,6 +190,70 @@ describe('PersonViewerComponent', () => {
       expect(routerStub.navigate).toHaveBeenCalledWith(['person/12']);
       flush();
     }));
+
+    it('navigates back when nothing entered', () => {
+      const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
+      navBar.backClicked.next();
+      expect(routerStub.navigate).toHaveBeenCalledWith(['persons']);
+    });
+
+    it('navigates back when name entered and confirmed', () => {
+      const dialogSpy = spyOn(dialog, 'open');
+
+      dialogSpy.and.returnValue({ afterClosed: () => of(true) });
+      inputNewName();
+      fixture.detectChanges();
+
+      const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
+      navBar.backClicked.next();
+
+      expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
+      expect(routerStub.navigate).toHaveBeenCalledWith(['persons']);
+    });
+
+    it('navigates back when picture entered and confirmed', fakeAsync(() => {
+      const dialogSpy = spyOn(dialog, 'open');
+
+      dialogSpy.and.returnValue({ afterClosed: () => of(true) });
+      simulateFileInput(new File([], 'test'), 'abc');
+      tick();
+      fixture.detectChanges();
+
+      const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
+      navBar.backClicked.next();
+
+      expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
+      expect(routerStub.navigate).toHaveBeenCalledWith(['persons']);
+    }));
+
+    it('navigates not back when name changed and not confirmed', () => {
+      const dialogSpy = spyOn(dialog, 'open');
+
+      dialogSpy.and.returnValue({ afterClosed: () => of(false) });
+      inputNewName();
+      fixture.detectChanges();
+
+      const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
+      navBar.backClicked.next();
+
+      expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
+      expect(routerStub.navigate).not.toHaveBeenCalled();
+    });
+
+    it('navigates not back when picture entered and not confirmed', fakeAsync(() => {
+      const dialogSpy = spyOn(dialog, 'open');
+
+      dialogSpy.and.returnValue({ afterClosed: () => of(false) });
+      simulateFileInput(new File([], 'test'), 'abc');
+      tick();
+      fixture.detectChanges();
+
+      const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
+      navBar.backClicked.next();
+
+      expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
+      expect(routerStub.navigate).not.toHaveBeenCalledWith(['persons']);
+    }));
   });
 
   it('navigates to person/new when no person with provided id was found', fakeAsync(() => {
@@ -206,11 +274,6 @@ describe('PersonViewerComponent', () => {
       fixture.detectChanges();
       reloadDebugElements();
     }));
-
-    function inputNewName() {
-      inputName.nativeElement.value = 'New Name';
-      inputName.nativeElement.dispatchEvent(new Event('input'));
-    }
 
     it('sets isNew to false', () => {
       expect(component.isNew).toBe(false);
@@ -356,9 +419,8 @@ describe('PersonViewerComponent', () => {
 
     it('navigates back when no changes', () => {
       const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
-      const goBackSpy = jasmine.createSpy('goBack');
-      navBar.backClicked.next(goBackSpy);
-      expect(goBackSpy).toHaveBeenCalled();
+      navBar.backClicked.next();
+      expect(routerStub.navigate).toHaveBeenCalledWith(['persons']);
     });
 
     it('navigates back when name changed and confirmed', () => {
@@ -369,11 +431,10 @@ describe('PersonViewerComponent', () => {
       fixture.detectChanges();
 
       const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
-      const goBackSpy = jasmine.createSpy('goBack');
-      navBar.backClicked.next(goBackSpy);
+      navBar.backClicked.next();
 
       expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
-      expect(goBackSpy).toHaveBeenCalled();
+      expect(routerStub.navigate).toHaveBeenCalledWith(['persons']);
     });
 
     it('navigates not back when name changed and not confirmed', () => {
@@ -384,11 +445,10 @@ describe('PersonViewerComponent', () => {
       fixture.detectChanges();
 
       const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
-      const goBackSpy = jasmine.createSpy('goBack');
-      navBar.backClicked.next(goBackSpy);
+      navBar.backClicked.next();
 
       expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
-      expect(goBackSpy).not.toHaveBeenCalled();
+      expect(routerStub.navigate).not.toHaveBeenCalled();
     });
   });
 });

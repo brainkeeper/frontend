@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -18,7 +17,7 @@ export class NavigationBarComponent implements OnInit {
   @Output()
   backClicked = new EventEmitter<() => void>();
 
-  constructor(private location: Location) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -32,6 +31,6 @@ export class NavigationBarComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['']);
   }
 }

@@ -1,4 +1,4 @@
-<app-navigation-bar title="Person" showBackButton="true" (backClicked)="onBackClicked($event)"></app-navigation-bar>
+<app-navigation-bar title="Person" showBackButton="true" (backClicked)="onBackClicked()"></app-navigation-bar>
 
 
 <form [formGroup]="personForm" (ngSubmit)="onSave()" *ngIf="person || isNew">

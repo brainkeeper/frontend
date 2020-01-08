@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,10 +14,6 @@ describe('StartComponent', () => {
   let fixture: ComponentFixture<StartComponent>;
   let debugElement: DebugElement;
 
-  const locationStub = {
-    back: jasmine.createSpy('back')
-  };
-
   let routerStub;
 
   beforeEach(async(() => {
@@ -34,7 +29,6 @@ describe('StartComponent', () => {
         MatIconModule,
       ],
       providers: [
-        { provide: Location, useValue: locationStub },
         { provide: Router, useValue: routerStub },
       ],
     })

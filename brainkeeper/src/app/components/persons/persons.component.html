@@ -1,1 +1,9 @@
 <app-navigation-bar title="Persons" [showBackButton]="true"></app-navigation-bar>
+
+<button mat-fab aria-label="Add new person button" id="btn-add" (click)="onAddClicked()">
+  <mat-icon>person_add</mat-icon>
+</button>
+
+<mat-list *ngIf='allPersons'>
+  <app-person-list-item *ngFor="let p of allPersons | async" [person]="p" [showScore]="false"></app-person-list-item>
+</mat-list>

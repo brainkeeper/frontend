@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
@@ -29,6 +30,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { PersonsComponent } from './components/persons/persons.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { StartComponent } from './components/start/start.component';
+import { PersonListItemComponent } from './components/person-list-item/person-list-item.component';
 import { PersonEditorComponent } from './components/person-editor/person-editor.component';
 import { DialogConfirmDeleteComponent } from './components/dialogs/dialog-confirm-delete/dialog-confirm-delete.component';
 import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-exit/dialog-confirm-exit.component';
@@ -45,6 +47,7 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
     PersonsComponent,
     NavigationBarComponent,
     StartComponent,
+    PersonListItemComponent,
     PersonEditorComponent,
     DialogConfirmDeleteComponent,
     DialogConfirmExitComponent,
@@ -56,6 +59,7 @@ import { DialogConfirmExitComponent } from './components/dialogs/dialog-confirm-
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatListModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
