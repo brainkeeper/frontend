@@ -356,9 +356,7 @@ describe('PersonViewerComponent', () => {
 
     it('navigates back when no changes', () => {
       const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
-      const goBackSpy = jasmine.createSpy('goBack');
-      navBar.backClicked.next(goBackSpy);
-      expect(goBackSpy).toHaveBeenCalled();
+      expect(routerStub.navigate).toHaveBeenCalledWith(['persons']);
     });
 
     it('navigates back when name changed and confirmed', () => {
@@ -369,11 +367,10 @@ describe('PersonViewerComponent', () => {
       fixture.detectChanges();
 
       const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
-      const goBackSpy = jasmine.createSpy('goBack');
-      navBar.backClicked.next(goBackSpy);
+      navBar.backClicked.next();
 
       expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
-      expect(goBackSpy).toHaveBeenCalled();
+      expect(routerStub.navigate).toHaveBeenCalledWith(['persons']);
     });
 
     it('navigates not back when name changed and not confirmed', () => {
@@ -384,11 +381,10 @@ describe('PersonViewerComponent', () => {
       fixture.detectChanges();
 
       const navBar: NavigationBarComponent = fixture.debugElement.query(By.css('app-navigation-bar')).context;
-      const goBackSpy = jasmine.createSpy('goBack');
-      navBar.backClicked.next(goBackSpy);
+      navBar.backClicked.next();
 
       expect(dialogSpy).toHaveBeenCalledWith(DialogConfirmExitComponent);
-      expect(goBackSpy).not.toHaveBeenCalled();
+      expect(routerStub.navigate).not.toHaveBeenCalled();
     });
   });
 });

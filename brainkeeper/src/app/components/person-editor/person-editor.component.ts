@@ -74,21 +74,25 @@ export class PersonEditorComponent implements OnInit {
     this.dialog.open(DialogConfirmDeleteComponent).afterClosed().subscribe(result => {
       if (result) {
         this.personService.remove(this.person.id);
-        this.router.navigate(['persons']);
+        this.navigateToPersonList();
       }
     });
   }
 
-  private onBackClicked(goBack: () => void) {
+  private onBackClicked() {
     if (this.changed()) {
       this.dialog.open(DialogConfirmExitComponent).afterClosed().subscribe(result => {
         if (result) {
-          goBack();
+          this.navigateToPersonList();
         }
       });
     } else {
-      goBack();
+      this.navigateToPersonList();
     }
+  }
+
+  private navigateToPersonList() {
+    this.router.navigate(['persons']);
   }
 
   private async onFileInput($event) {
