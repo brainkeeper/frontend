@@ -10,14 +10,13 @@ import {Router} from '@angular/router';
 })
 export class PersonsComponent implements OnInit {
 
-  @Input()
   allPersons: Promise<Person[]>;
 
   constructor(public personService: PersonService, private router: Router) {
-    this.allPersons = personService.getAll();
   }
 
   ngOnInit() {
+    this.allPersons = this.personService.getAll();
   }
 
 
