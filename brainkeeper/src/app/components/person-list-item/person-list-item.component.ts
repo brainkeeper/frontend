@@ -12,7 +12,7 @@ export class PersonListItemComponent implements OnInit {
   @Input()
   public person: Person;
   @Input()
-  public showScore: boolean;
+  public showScore = false;
 
   constructor(private router: Router) {
   }

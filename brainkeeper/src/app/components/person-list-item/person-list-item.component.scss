@@ -1,9 +1,10 @@
 .container {
-  width: 100%;
+  width: calc(100% - 30px);
   height: auto;
   display: flex;
   align-items: center;
-  padding-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .picture {
