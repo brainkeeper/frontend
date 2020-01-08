@@ -7,17 +7,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { Location } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
   let fixture: ComponentFixture<NavigationBarComponent>;
 
-  let locationStub;
+  let routerStub;
 
   beforeEach(async(() => {
-    locationStub = {
-      back: jasmine.createSpy('back')
-    };
+    routerStub = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
       declarations: [
         NavigationBarComponent,
@@ -28,7 +27,7 @@ describe('NavigationBarComponent', () => {
         MatIconModule,
       ],
       providers: [
-        { provide: Location, useValue: locationStub },
+        { provide: Router, useValue: routerStub },
       ],
     })
       .compileComponents();
@@ -56,14 +55,14 @@ describe('NavigationBarComponent', () => {
     component.showBackButton = true;
     fixture.detectChanges();
     fixture.debugElement.query(By.css('button')).nativeElement.click();
-    expect(locationStub.back).toHaveBeenCalled();
+    expect(routerStub.navigate).toHaveBeenCalledWith(['']);
   });
 
   it('click on back button emits event', (done) => {
     component.showBackButton = true;
     fixture.detectChanges();
     component.backClicked.subscribe(goBack => {
-        expect(locationStub.back).not.toHaveBeenCalled();
+        expect(routerStub.navigate).not.toHaveBeenCalled();
         done();
     });
     fixture.debugElement.query(By.css('button')).nativeElement.click();
@@ -73,9 +72,10 @@ describe('NavigationBarComponent', () => {
     component.showBackButton = true;
     fixture.detectChanges();
     component.backClicked.subscribe(goBack => {
-        expect(locationStub.back).not.toHaveBeenCalled();
+        expect(routerStub.navigate).not.toHaveBeenCalled();
         goBack();
-        expect(locationStub.back).toHaveBeenCalledTimes(1);
+        expect(routerStub.navigate).toHaveBeenCalledTimes(1);
+        expect(routerStub.navigate).toHaveBeenCalledWith(['']);
         done();
     });
     fixture.debugElement.query(By.css('button')).nativeElement.click();
@@ -118,7 +118,7 @@ describe('NavigationBarComponent', () => {
         MatIconModule,
       ],
       providers: [
-        { provide: Location, useValue: locationStub },
+        { provide: Router, useValue: routerStub },
       ],
     }).compileComponents();
     const host = TestBed.createComponent(TestHostComponent);

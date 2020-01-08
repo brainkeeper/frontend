@@ -18,10 +18,6 @@ describe('PersonsComponent', () => {
   let component: PersonsComponent;
   let fixture: ComponentFixture<PersonsComponent>;
 
-  const locationStub = {
-    back: jasmine.createSpy('back')
-  };
-
   const routerStub = jasmine.createSpyObj('Router', ['navigate']);
 
   let personServiceStub;
@@ -46,7 +42,6 @@ describe('PersonsComponent', () => {
         MatCardModule,
       ],
       providers: [
-        { provide: Location, useValue: locationStub },
         { provide: PersonService, useValue: personServiceStub },
         { provide: Router, useValue: routerStub},
       ],

@@ -68,7 +68,6 @@ describe('PersonEditorComponent', () => {
         NoopAnimationsModule,
       ],
       providers: [
-        { provide: Location, useValue: locationStub },
         { provide: Router, useValue: routerStub },
         { provide: PersonService, useValue: personServiceStub },
         { provide: ImageService, useValue: imageServiceStub },

@@ -1,5 +1,4 @@
-import { Location } from '@angular/common';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {  ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,10 +15,6 @@ import { By } from '@angular/platform-browser';
 describe('StatisticsComponent', () => {
   let component: StatisticsComponent;
   let fixture: ComponentFixture<StatisticsComponent>;
-
-  const locationStub = {
-    back: jasmine.createSpy('back')
-  };
 
   const routerStub = jasmine.createSpyObj('Router', ['navigate']);
 
@@ -45,7 +40,6 @@ describe('StatisticsComponent', () => {
         MatListModule,
       ],
       providers: [
-        { provide: Location, useValue: locationStub },
         { provide: PersonService, useValue: personServiceStub },
         { provide: Router, useValue: routerStub },
       ],
