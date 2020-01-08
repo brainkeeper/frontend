@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {PersonService} from '../../services/person-service';
+import {Person} from '../../classes/person';
 
 @Component({
   selector: 'app-statistics',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  allPersonsWithScore: Promise<Person[]>;
+
+  constructor(public personService: PersonService) {
+    this.allPersonsWithScore = personService.getAllWithScore();
+  }
 
   ngOnInit() {
   }
