@@ -19,3 +19,5 @@ Our Idea was to build a simple to use App, usable on all devices, where the Play
 
 We designed this simplistic App where the focus of the start screen is to just start playing. 
 When the user wants to see his progress, he can do so after clicking the “Statistics” button, where we show present him all the persons that he has already recognized, and how often he has done so, but only that. We intentionally only give positive statistics and feedback, so that we don’t discouraged our player, when his menta capabilities may be declining, because stopping mental training may only accelerate the decay. With the button “Persons” he can add, remove and change the persons he is playing the game with.
+
+In the beginning we used the Working Backwards strategy from Amazon to come up with our plans. In this process we created a self-made “[Press Release](docs/Press_Release.pdf)”, an [FAQ](docs/FAQ.pdf) with hypothetical questions from users and stakeholders as well as first [Wireframes](docs/Wireframes.png), but it is all in German.
