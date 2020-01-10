@@ -9,15 +9,21 @@
 
 ---
 
+### Introduction
 This Project was started by a [group of students](https://github.com/orgs/brainkeeper/people) from Munich University of Applied Sciences together with the Digital Transformation Lab and the local Alzheimer's Association
 
+### Overview
 Brainkeeper is a small specialized memory training app, which aims to improve, or slow the degeneration of the ability to remember and recognize faces and names.
 
+### Problem description
 A big problem of people with high age or Alzheimer’s often is, that they don’t recognize people like family members, old friends or medical personal they interact with on a regular basis. They often are ashamed because of that, and as a result of that stop socializing.
 
+### The Idea
 Our Idea was to build a simple to use App, usable on all devices, where the Player can train there brain with faces of people who are of interest to him. 
 
+### The result
 We designed this simplistic App where the focus of the start screen is to just start playing. 
 When the user wants to see his progress, he can do so after clicking the “Statistics” button, where we show present him all the persons that he has already recognized, and how often he has done so, but only that. We intentionally only give positive statistics and feedback, so that we don’t discouraged our player, when his menta capabilities may be declining, because stopping mental training may only accelerate the decay. With the button “Persons” he can add, remove and change the persons he is playing the game with.
 
+#### Documents from planning phase
 In the beginning we used the Working Backwards strategy from Amazon to come up with our plans. In this process we created a self-made “[Press Release](docs/Press_Release.pdf)”, an [FAQ](docs/FAQ.pdf) with hypothetical questions from users and stakeholders as well as first [Wireframes](docs/Wireframes.png), but it is all in German.
