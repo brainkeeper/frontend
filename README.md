@@ -19,7 +19,7 @@ Brainkeeper is a small specialized memory training app, which aims to improve, o
 A major problem of people with high age or Alzheimer’s often is that they do not recognize friends, family members and other people they interact with, any longer. They often are ashamed of this and as a result stop socializing.
 
 ### Idea
-Our idea was to build a simple to use app for all devices, with which the player can reaffirm the their brain's ability to connect faces to names. 
+Our idea was to build a simple to use app for all devices, with which the player can reaffirm their brain's ability to connect faces to names. 
 
 ### Result
 We designed this simplistic app where the focus of the start screen is to just start playing. 
